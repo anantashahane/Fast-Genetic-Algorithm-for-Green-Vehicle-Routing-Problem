@@ -8,6 +8,20 @@
 
 /* Begin PBXBuildFile section */
 		8C4F99582A1E3B3B00277C6A /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C4F99572A1E3B3B00277C6A /* main.swift */; };
+		8C4F99612A1E3B6100277C6A /* Readfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C4F995E2A1E3B6100277C6A /* Readfile.swift */; };
+		8C4F99622A1E3B6100277C6A /* ReadFiles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C4F995F2A1E3B6100277C6A /* ReadFiles.swift */; };
+		8C4F99632A1E3B6100277C6A /* Customer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C4F99602A1E3B6100277C6A /* Customer.swift */; };
+		8C4F99C32A1E3D4600277C6A /* Miscellaneous.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C4F99C22A1E3D4600277C6A /* Miscellaneous.swift */; };
+		8C4F99C62A1E4A7F00277C6A /* GeneticAlgorithm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C4F99C52A1E4A7F00277C6A /* GeneticAlgorithm.swift */; };
+		8C4F99C82A1E4E7400277C6A /* Initialise.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C4F99C72A1E4E7400277C6A /* Initialise.swift */; };
+		8C4F99CA2A1E4EB100277C6A /* Routine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C4F99C92A1E4EB100277C6A /* Routine.swift */; };
+		8C4F99CC2A1E53ED00277C6A /* PlotGraphs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C4F99CB2A1E53ED00277C6A /* PlotGraphs.swift */; };
+		8C4F99CF2A1E540E00277C6A /* PythonKit in Frameworks */ = {isa = PBXBuildFile; productRef = 8C4F99CE2A1E540E00277C6A /* PythonKit */; };
+		8C7741EA2A279ACE003AC37F /* Evaluate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C7741E92A279ACE003AC37F /* Evaluate.swift */; };
+		8C806DC62A2A1BCE00D8B376 /* Roulette.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C806DC52A2A1BCE00D8B376 /* Roulette.swift */; };
+		8CA718622A2DF19D0055279F /* Mutation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA718612A2DF19D0055279F /* Mutation.swift */; };
+		8CAD3F8B2A31F7DC00B55710 /* MultiObjectiveArchive.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CAD3F8A2A31F7DC00B55710 /* MultiObjectiveArchive.swift */; };
+		8CB6F30F2A309F9700E08C8A /* Selection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CB6F30E2A309F9700E08C8A /* Selection.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -25,6 +39,113 @@
 /* Begin PBXFileReference section */
 		8C4F99542A1E3B3B00277C6A /* Experiment 6 */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "Experiment 6"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8C4F99572A1E3B3B00277C6A /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
+		8C4F995E2A1E3B6100277C6A /* Readfile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Readfile.swift; sourceTree = "<group>"; };
+		8C4F995F2A1E3B6100277C6A /* ReadFiles.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReadFiles.swift; sourceTree = "<group>"; };
+		8C4F99602A1E3B6100277C6A /* Customer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Customer.swift; sourceTree = "<group>"; };
+		8C4F99652A1E3BB000277C6A /* A-n37-k5.vrp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "A-n37-k5.vrp"; sourceTree = "<group>"; };
+		8C4F99662A1E3BB000277C6A /* E-n76-k14.vrp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "E-n76-k14.vrp"; sourceTree = "<group>"; };
+		8C4F99672A1E3BB000277C6A /* A-n48-k7.vrp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "A-n48-k7.vrp"; sourceTree = "<group>"; };
+		8C4F99682A1E3BB000277C6A /* A-n69-k9.vrp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "A-n69-k9.vrp"; sourceTree = "<group>"; };
+		8C4F99692A1E3BB000277C6A /* A-n54-k7.vrp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "A-n54-k7.vrp"; sourceTree = "<group>"; };
+		8C4F996A2A1E3BB000277C6A /* F-n135-k7.vrp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "F-n135-k7.vrp"; sourceTree = "<group>"; };
+		8C4F996B2A1E3BB000277C6A /* A-n63-k9.vrp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "A-n63-k9.vrp"; sourceTree = "<group>"; };
+		8C4F996C2A1E3BB000277C6A /* B-n63-k10.vrp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "B-n63-k10.vrp"; sourceTree = "<group>"; };
+		8C4F996D2A1E3BB000277C6A /* B-n45-k6.vrp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "B-n45-k6.vrp"; sourceTree = "<group>"; };
+		8C4F996E2A1E3BB000277C6A /* B-n50-k7.vrp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "B-n50-k7.vrp"; sourceTree = "<group>"; };
+		8C4F996F2A1E3BB000277C6A /* A-n38-k5.vrp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "A-n38-k5.vrp"; sourceTree = "<group>"; };
+		8C4F99702A1E3BB000277C6A /* P-n20-k2.vrp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "P-n20-k2.vrp"; sourceTree = "<group>"; };
+		8C4F99712A1E3BB000277C6A /* P-n101-k4.vrp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "P-n101-k4.vrp"; sourceTree = "<group>"; };
+		8C4F99722A1E3BB000277C6A /* A-n34-k5.vrp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "A-n34-k5.vrp"; sourceTree = "<group>"; };
+		8C4F99732A1E3BB000277C6A /* A-n39-k6.vrp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "A-n39-k6.vrp"; sourceTree = "<group>"; };
+		8C4F99742A1E3BB000277C6A /* P-n22-k2.vrp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "P-n22-k2.vrp"; sourceTree = "<group>"; };
+		8C4F99752A1E3BB000277C6A /* B-n68-k9.vrp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "B-n68-k9.vrp"; sourceTree = "<group>"; };
+		8C4F99762A1E3BB000277C6A /* E-n30-k3.vrp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "E-n30-k3.vrp"; sourceTree = "<group>"; };
+		8C4F99772A1E3BB000277C6A /* P-n65-k10.vrp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "P-n65-k10.vrp"; sourceTree = "<group>"; };
+		8C4F99782A1E3BB100277C6A /* P-n76-k5.vrp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "P-n76-k5.vrp"; sourceTree = "<group>"; };
+		8C4F99792A1E3BB100277C6A /* B-n34-k5.vrp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "B-n34-k5.vrp"; sourceTree = "<group>"; };
+		8C4F997A2A1E3BB100277C6A /* P-n60-k10.vrp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "P-n60-k10.vrp"; sourceTree = "<group>"; };
+		8C4F997B2A1E3BB100277C6A /* B-n56-k7.vrp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "B-n56-k7.vrp"; sourceTree = "<group>"; };
+		8C4F997C2A1E3BB100277C6A /* M-n200-k17.vrp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "M-n200-k17.vrp"; sourceTree = "<group>"; };
+		8C4F997D2A1E3BB100277C6A /* A-n39-k5.vrp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "A-n39-k5.vrp"; sourceTree = "<group>"; };
+		8C4F997E2A1E3BB100277C6A /* A-n44-k6.vrp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "A-n44-k6.vrp"; sourceTree = "<group>"; };
+		8C4F997F2A1E3BB100277C6A /* P-n51-k10.vrp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "P-n51-k10.vrp"; sourceTree = "<group>"; };
+		8C4F99802A1E3BB100277C6A /* A-n33-k6.vrp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "A-n33-k6.vrp"; sourceTree = "<group>"; };
+		8C4F99812A1E3BB100277C6A /* A-n60-k9.vrp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "A-n60-k9.vrp"; sourceTree = "<group>"; };
+		8C4F99822A1E3BB100277C6A /* F-n45-k4.vrp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "F-n45-k4.vrp"; sourceTree = "<group>"; };
+		8C4F99832A1E3BB100277C6A /* P-n16-k8.vrp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "P-n16-k8.vrp"; sourceTree = "<group>"; };
+		8C4F99842A1E3BB100277C6A /* A-n46-k7.vrp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "A-n46-k7.vrp"; sourceTree = "<group>"; };
+		8C4F99852A1E3BB100277C6A /* B-n35-k5.vrp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "B-n35-k5.vrp"; sourceTree = "<group>"; };
+		8C4F99862A1E3BB100277C6A /* P-n50-k8.vrp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "P-n50-k8.vrp"; sourceTree = "<group>"; };
+		8C4F99872A1E3BB100277C6A /* A-n63-k10.vrp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "A-n63-k10.vrp"; sourceTree = "<group>"; };
+		8C4F99882A1E3BB100277C6A /* E-n76-k8.vrp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "E-n76-k8.vrp"; sourceTree = "<group>"; };
+		8C4F99892A1E3BB100277C6A /* A-n33-k5.vrp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "A-n33-k5.vrp"; sourceTree = "<group>"; };
+		8C4F998A2A1E3BB200277C6A /* M-n101-k10.vrp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "M-n101-k10.vrp"; sourceTree = "<group>"; };
+		8C4F998B2A1E3BB200277C6A /* B-n57-k9.vrp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "B-n57-k9.vrp"; sourceTree = "<group>"; };
+		8C4F998C2A1E3BB200277C6A /* B-n39-k5.vrp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "B-n39-k5.vrp"; sourceTree = "<group>"; };
+		8C4F998D2A1E3BB200277C6A /* A-n61-k9.vrp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "A-n61-k9.vrp"; sourceTree = "<group>"; };
+		8C4F998E2A1E3BB200277C6A /* A-n62-k8.vrp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "A-n62-k8.vrp"; sourceTree = "<group>"; };
+		8C4F998F2A1E3BB200277C6A /* P-n21-k2.vrp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "P-n21-k2.vrp"; sourceTree = "<group>"; };
+		8C4F99902A1E3BB200277C6A /* A-n65-k9.vrp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "A-n65-k9.vrp"; sourceTree = "<group>"; };
+		8C4F99912A1E3BB200277C6A /* B-n57-k7.vrp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "B-n57-k7.vrp"; sourceTree = "<group>"; };
+		8C4F99922A1E3BB200277C6A /* A-n53-k7.vrp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "A-n53-k7.vrp"; sourceTree = "<group>"; };
+		8C4F99932A1E3BB200277C6A /* A-n45-k7.vrp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "A-n45-k7.vrp"; sourceTree = "<group>"; };
+		8C4F99942A1E3BB200277C6A /* P-n19-k2.vrp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "P-n19-k2.vrp"; sourceTree = "<group>"; };
+		8C4F99952A1E3BB200277C6A /* P-n70-k10.vrp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "P-n70-k10.vrp"; sourceTree = "<group>"; };
+		8C4F99962A1E3BB200277C6A /* A-n36-k5.vrp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "A-n36-k5.vrp"; sourceTree = "<group>"; };
+		8C4F99972A1E3BB200277C6A /* B-n43-k6.vrp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "B-n43-k6.vrp"; sourceTree = "<group>"; };
+		8C4F99982A1E3BB200277C6A /* A-n37-k6.vrp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "A-n37-k6.vrp"; sourceTree = "<group>"; };
+		8C4F99992A1E3BB200277C6A /* B-n45-k5.vrp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "B-n45-k5.vrp"; sourceTree = "<group>"; };
+		8C4F999A2A1E3BB200277C6A /* E-n23-k3.vrp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "E-n23-k3.vrp"; sourceTree = "<group>"; };
+		8C4F999B2A1E3BB300277C6A /* E-n76-k10.vrp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "E-n76-k10.vrp"; sourceTree = "<group>"; };
+		8C4F999C2A1E3BB300277C6A /* B-n31-k5.vrp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "B-n31-k5.vrp"; sourceTree = "<group>"; };
+		8C4F999D2A1E3BB300277C6A /* A-n55-k9.vrp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "A-n55-k9.vrp"; sourceTree = "<group>"; };
+		8C4F999E2A1E3BB300277C6A /* B-n78-k10.vrp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "B-n78-k10.vrp"; sourceTree = "<group>"; };
+		8C4F999F2A1E3BB300277C6A /* B-n67-k10.vrp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "B-n67-k10.vrp"; sourceTree = "<group>"; };
+		8C4F99A02A1E3BB300277C6A /* E-n76-k7.vrp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "E-n76-k7.vrp"; sourceTree = "<group>"; };
+		8C4F99A12A1E3BB300277C6A /* E-n101-k14.vrp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "E-n101-k14.vrp"; sourceTree = "<group>"; };
+		8C4F99A22A1E3BB300277C6A /* P-n55-k10.vrp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "P-n55-k10.vrp"; sourceTree = "<group>"; };
+		8C4F99A32A1E3BB300277C6A /* P-n55-k7.vrp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "P-n55-k7.vrp"; sourceTree = "<group>"; };
+		8C4F99A42A1E3BB300277C6A /* A-n45-k6.vrp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "A-n45-k6.vrp"; sourceTree = "<group>"; };
+		8C4F99A52A1E3BB300277C6A /* B-n64-k9.vrp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "B-n64-k9.vrp"; sourceTree = "<group>"; };
+		8C4F99A62A1E3BB300277C6A /* B-n44-k7.vrp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "B-n44-k7.vrp"; sourceTree = "<group>"; };
+		8C4F99A72A1E3BB300277C6A /* P-n55-k8.vrp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "P-n55-k8.vrp"; sourceTree = "<group>"; };
+		8C4F99A82A1E3BB300277C6A /* F-n72-k4.vrp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "F-n72-k4.vrp"; sourceTree = "<group>"; };
+		8C4F99A92A1E3BB300277C6A /* P-n76-k4.vrp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "P-n76-k4.vrp"; sourceTree = "<group>"; };
+		8C4F99AA2A1E3BB300277C6A /* E-n22-k4.vrp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "E-n22-k4.vrp"; sourceTree = "<group>"; };
+		8C4F99AB2A1E3BB400277C6A /* E-n51-k5.vrp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "E-n51-k5.vrp"; sourceTree = "<group>"; };
+		8C4F99AC2A1E3BB400277C6A /* M-n151-k12.vrp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "M-n151-k12.vrp"; sourceTree = "<group>"; };
+		8C4F99AD2A1E3BB400277C6A /* A-n32-k5.vrp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "A-n32-k5.vrp"; sourceTree = "<group>"; };
+		8C4F99AE2A1E3BB400277C6A /* B-n50-k8.vrp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "B-n50-k8.vrp"; sourceTree = "<group>"; };
+		8C4F99AF2A1E3BB400277C6A /* B-n66-k9.vrp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "B-n66-k9.vrp"; sourceTree = "<group>"; };
+		8C4F99B02A1E3BB400277C6A /* B-n51-k7.vrp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "B-n51-k7.vrp"; sourceTree = "<group>"; };
+		8C4F99B12A1E3BB400277C6A /* B-n52-k7.vrp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "B-n52-k7.vrp"; sourceTree = "<group>"; };
+		8C4F99B22A1E3BB400277C6A /* M-n200-k16.vrp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "M-n200-k16.vrp"; sourceTree = "<group>"; };
+		8C4F99B32A1E3BB400277C6A /* E-n33-k4.vrp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "E-n33-k4.vrp"; sourceTree = "<group>"; };
+		8C4F99B42A1E3BB400277C6A /* B-n38-k6.vrp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "B-n38-k6.vrp"; sourceTree = "<group>"; };
+		8C4F99B52A1E3BB400277C6A /* P-n22-k8.vrp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "P-n22-k8.vrp"; sourceTree = "<group>"; };
+		8C4F99B62A1E3BB400277C6A /* P-n45-k5.vrp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "P-n45-k5.vrp"; sourceTree = "<group>"; };
+		8C4F99B72A1E3BB400277C6A /* A-n64-k9.vrp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "A-n64-k9.vrp"; sourceTree = "<group>"; };
+		8C4F99B82A1E3BB400277C6A /* P-n50-k7.vrp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "P-n50-k7.vrp"; sourceTree = "<group>"; };
+		8C4F99B92A1E3BB500277C6A /* P-n55-k15.vrp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "P-n55-k15.vrp"; sourceTree = "<group>"; };
+		8C4F99BA2A1E3BB500277C6A /* A-n80-k10.vrp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "A-n80-k10.vrp"; sourceTree = "<group>"; };
+		8C4F99BB2A1E3BB500277C6A /* E-n101-k8.vrp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "E-n101-k8.vrp"; sourceTree = "<group>"; };
+		8C4F99BC2A1E3BB500277C6A /* M-n121-k7.vrp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "M-n121-k7.vrp"; sourceTree = "<group>"; };
+		8C4F99BD2A1E3BB500277C6A /* P-n23-k8.vrp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "P-n23-k8.vrp"; sourceTree = "<group>"; };
+		8C4F99BE2A1E3BB500277C6A /* P-n50-k10.vrp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "P-n50-k10.vrp"; sourceTree = "<group>"; };
+		8C4F99BF2A1E3BB500277C6A /* P-n60-k15.vrp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "P-n60-k15.vrp"; sourceTree = "<group>"; };
+		8C4F99C02A1E3BB500277C6A /* B-n41-k6.vrp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "B-n41-k6.vrp"; sourceTree = "<group>"; };
+		8C4F99C12A1E3BB500277C6A /* P-n40-k5.vrp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "P-n40-k5.vrp"; sourceTree = "<group>"; };
+		8C4F99C22A1E3D4600277C6A /* Miscellaneous.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Miscellaneous.swift; sourceTree = "<group>"; };
+		8C4F99C52A1E4A7F00277C6A /* GeneticAlgorithm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneticAlgorithm.swift; sourceTree = "<group>"; };
+		8C4F99C72A1E4E7400277C6A /* Initialise.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Initialise.swift; sourceTree = "<group>"; };
+		8C4F99C92A1E4EB100277C6A /* Routine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Routine.swift; sourceTree = "<group>"; };
+		8C4F99CB2A1E53ED00277C6A /* PlotGraphs.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlotGraphs.swift; sourceTree = "<group>"; };
+		8C4F99D02A1E54C200277C6A /* Experiment 6.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Experiment 6.entitlements"; sourceTree = "<group>"; };
+		8C7741E92A279ACE003AC37F /* Evaluate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Evaluate.swift; sourceTree = "<group>"; };
+		8C806DC52A2A1BCE00D8B376 /* Roulette.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Roulette.swift; sourceTree = "<group>"; };
+		8CA718612A2DF19D0055279F /* Mutation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mutation.swift; sourceTree = "<group>"; };
+		8CAD3F8A2A31F7DC00B55710 /* MultiObjectiveArchive.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MultiObjectiveArchive.swift; sourceTree = "<group>"; };
+		8CB6F30E2A309F9700E08C8A /* Selection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Selection.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -32,6 +153,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8C4F99CF2A1E540E00277C6A /* PythonKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -41,6 +163,7 @@
 		8C4F994B2A1E3B3B00277C6A = {
 			isa = PBXGroup;
 			children = (
+				8C4F99C22A1E3D4600277C6A /* Miscellaneous.swift */,
 				8C4F99562A1E3B3B00277C6A /* Experiment 6 */,
 				8C4F99552A1E3B3B00277C6A /* Products */,
 			);
@@ -57,9 +180,131 @@
 		8C4F99562A1E3B3B00277C6A /* Experiment 6 */ = {
 			isa = PBXGroup;
 			children = (
+				8C4F99D02A1E54C200277C6A /* Experiment 6.entitlements */,
+				8C4F99CB2A1E53ED00277C6A /* PlotGraphs.swift */,
+				8C4F99C92A1E4EB100277C6A /* Routine.swift */,
+				8C4F99642A1E3B8F00277C6A /* Benchmarks */,
+				8C4F99C42A1E4A3000277C6A /* Genetic Algorithm */,
 				8C4F99572A1E3B3B00277C6A /* main.swift */,
+				8CAD3F8A2A31F7DC00B55710 /* MultiObjectiveArchive.swift */,
+				8C4F99602A1E3B6100277C6A /* Customer.swift */,
+				8C4F995E2A1E3B6100277C6A /* Readfile.swift */,
+				8C4F995F2A1E3B6100277C6A /* ReadFiles.swift */,
 			);
 			path = "Experiment 6";
+			sourceTree = "<group>";
+		};
+		8C4F99642A1E3B8F00277C6A /* Benchmarks */ = {
+			isa = PBXGroup;
+			children = (
+				8C4F99AD2A1E3BB400277C6A /* A-n32-k5.vrp */,
+				8C4F99892A1E3BB100277C6A /* A-n33-k5.vrp */,
+				8C4F99802A1E3BB100277C6A /* A-n33-k6.vrp */,
+				8C4F99722A1E3BB000277C6A /* A-n34-k5.vrp */,
+				8C4F99962A1E3BB200277C6A /* A-n36-k5.vrp */,
+				8C4F99652A1E3BB000277C6A /* A-n37-k5.vrp */,
+				8C4F99982A1E3BB200277C6A /* A-n37-k6.vrp */,
+				8C4F996F2A1E3BB000277C6A /* A-n38-k5.vrp */,
+				8C4F997D2A1E3BB100277C6A /* A-n39-k5.vrp */,
+				8C4F99732A1E3BB000277C6A /* A-n39-k6.vrp */,
+				8C4F997E2A1E3BB100277C6A /* A-n44-k6.vrp */,
+				8C4F99A42A1E3BB300277C6A /* A-n45-k6.vrp */,
+				8C4F99932A1E3BB200277C6A /* A-n45-k7.vrp */,
+				8C4F99842A1E3BB100277C6A /* A-n46-k7.vrp */,
+				8C4F99672A1E3BB000277C6A /* A-n48-k7.vrp */,
+				8C4F99922A1E3BB200277C6A /* A-n53-k7.vrp */,
+				8C4F99692A1E3BB000277C6A /* A-n54-k7.vrp */,
+				8C4F999D2A1E3BB300277C6A /* A-n55-k9.vrp */,
+				8C4F99812A1E3BB100277C6A /* A-n60-k9.vrp */,
+				8C4F998D2A1E3BB200277C6A /* A-n61-k9.vrp */,
+				8C4F998E2A1E3BB200277C6A /* A-n62-k8.vrp */,
+				8C4F996B2A1E3BB000277C6A /* A-n63-k9.vrp */,
+				8C4F99872A1E3BB100277C6A /* A-n63-k10.vrp */,
+				8C4F99B72A1E3BB400277C6A /* A-n64-k9.vrp */,
+				8C4F99902A1E3BB200277C6A /* A-n65-k9.vrp */,
+				8C4F99682A1E3BB000277C6A /* A-n69-k9.vrp */,
+				8C4F99BA2A1E3BB500277C6A /* A-n80-k10.vrp */,
+				8C4F999C2A1E3BB300277C6A /* B-n31-k5.vrp */,
+				8C4F99792A1E3BB100277C6A /* B-n34-k5.vrp */,
+				8C4F99852A1E3BB100277C6A /* B-n35-k5.vrp */,
+				8C4F99B42A1E3BB400277C6A /* B-n38-k6.vrp */,
+				8C4F998C2A1E3BB200277C6A /* B-n39-k5.vrp */,
+				8C4F99C02A1E3BB500277C6A /* B-n41-k6.vrp */,
+				8C4F99972A1E3BB200277C6A /* B-n43-k6.vrp */,
+				8C4F99A62A1E3BB300277C6A /* B-n44-k7.vrp */,
+				8C4F99992A1E3BB200277C6A /* B-n45-k5.vrp */,
+				8C4F996D2A1E3BB000277C6A /* B-n45-k6.vrp */,
+				8C4F996E2A1E3BB000277C6A /* B-n50-k7.vrp */,
+				8C4F99AE2A1E3BB400277C6A /* B-n50-k8.vrp */,
+				8C4F99B02A1E3BB400277C6A /* B-n51-k7.vrp */,
+				8C4F99B12A1E3BB400277C6A /* B-n52-k7.vrp */,
+				8C4F997B2A1E3BB100277C6A /* B-n56-k7.vrp */,
+				8C4F99912A1E3BB200277C6A /* B-n57-k7.vrp */,
+				8C4F998B2A1E3BB200277C6A /* B-n57-k9.vrp */,
+				8C4F996C2A1E3BB000277C6A /* B-n63-k10.vrp */,
+				8C4F99A52A1E3BB300277C6A /* B-n64-k9.vrp */,
+				8C4F99AF2A1E3BB400277C6A /* B-n66-k9.vrp */,
+				8C4F999F2A1E3BB300277C6A /* B-n67-k10.vrp */,
+				8C4F99752A1E3BB000277C6A /* B-n68-k9.vrp */,
+				8C4F999E2A1E3BB300277C6A /* B-n78-k10.vrp */,
+				8C4F99AA2A1E3BB300277C6A /* E-n22-k4.vrp */,
+				8C4F999A2A1E3BB200277C6A /* E-n23-k3.vrp */,
+				8C4F99762A1E3BB000277C6A /* E-n30-k3.vrp */,
+				8C4F99B32A1E3BB400277C6A /* E-n33-k4.vrp */,
+				8C4F99AB2A1E3BB400277C6A /* E-n51-k5.vrp */,
+				8C4F99A02A1E3BB300277C6A /* E-n76-k7.vrp */,
+				8C4F99882A1E3BB100277C6A /* E-n76-k8.vrp */,
+				8C4F999B2A1E3BB300277C6A /* E-n76-k10.vrp */,
+				8C4F99662A1E3BB000277C6A /* E-n76-k14.vrp */,
+				8C4F99BB2A1E3BB500277C6A /* E-n101-k8.vrp */,
+				8C4F99A12A1E3BB300277C6A /* E-n101-k14.vrp */,
+				8C4F99822A1E3BB100277C6A /* F-n45-k4.vrp */,
+				8C4F99A82A1E3BB300277C6A /* F-n72-k4.vrp */,
+				8C4F996A2A1E3BB000277C6A /* F-n135-k7.vrp */,
+				8C4F998A2A1E3BB200277C6A /* M-n101-k10.vrp */,
+				8C4F99BC2A1E3BB500277C6A /* M-n121-k7.vrp */,
+				8C4F99AC2A1E3BB400277C6A /* M-n151-k12.vrp */,
+				8C4F99B22A1E3BB400277C6A /* M-n200-k16.vrp */,
+				8C4F997C2A1E3BB100277C6A /* M-n200-k17.vrp */,
+				8C4F99832A1E3BB100277C6A /* P-n16-k8.vrp */,
+				8C4F99942A1E3BB200277C6A /* P-n19-k2.vrp */,
+				8C4F99702A1E3BB000277C6A /* P-n20-k2.vrp */,
+				8C4F998F2A1E3BB200277C6A /* P-n21-k2.vrp */,
+				8C4F99742A1E3BB000277C6A /* P-n22-k2.vrp */,
+				8C4F99B52A1E3BB400277C6A /* P-n22-k8.vrp */,
+				8C4F99BD2A1E3BB500277C6A /* P-n23-k8.vrp */,
+				8C4F99C12A1E3BB500277C6A /* P-n40-k5.vrp */,
+				8C4F99B62A1E3BB400277C6A /* P-n45-k5.vrp */,
+				8C4F99B82A1E3BB400277C6A /* P-n50-k7.vrp */,
+				8C4F99862A1E3BB100277C6A /* P-n50-k8.vrp */,
+				8C4F99BE2A1E3BB500277C6A /* P-n50-k10.vrp */,
+				8C4F997F2A1E3BB100277C6A /* P-n51-k10.vrp */,
+				8C4F99A32A1E3BB300277C6A /* P-n55-k7.vrp */,
+				8C4F99A72A1E3BB300277C6A /* P-n55-k8.vrp */,
+				8C4F99A22A1E3BB300277C6A /* P-n55-k10.vrp */,
+				8C4F99B92A1E3BB500277C6A /* P-n55-k15.vrp */,
+				8C4F997A2A1E3BB100277C6A /* P-n60-k10.vrp */,
+				8C4F99BF2A1E3BB500277C6A /* P-n60-k15.vrp */,
+				8C4F99772A1E3BB000277C6A /* P-n65-k10.vrp */,
+				8C4F99952A1E3BB200277C6A /* P-n70-k10.vrp */,
+				8C4F99A92A1E3BB300277C6A /* P-n76-k4.vrp */,
+				8C4F99782A1E3BB100277C6A /* P-n76-k5.vrp */,
+				8C4F99712A1E3BB000277C6A /* P-n101-k4.vrp */,
+			);
+			path = Benchmarks;
+			sourceTree = "<group>";
+		};
+		8C4F99C42A1E4A3000277C6A /* Genetic Algorithm */ = {
+			isa = PBXGroup;
+			children = (
+				8C4F99C52A1E4A7F00277C6A /* GeneticAlgorithm.swift */,
+				8C4F99C72A1E4E7400277C6A /* Initialise.swift */,
+				8C7741E92A279ACE003AC37F /* Evaluate.swift */,
+				8C806DC52A2A1BCE00D8B376 /* Roulette.swift */,
+				8CA718612A2DF19D0055279F /* Mutation.swift */,
+				8CB6F30E2A309F9700E08C8A /* Selection.swift */,
+			);
+			path = "Genetic Algorithm";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -78,6 +323,9 @@
 			dependencies = (
 			);
 			name = "Experiment 6";
+			packageProductDependencies = (
+				8C4F99CE2A1E540E00277C6A /* PythonKit */,
+			);
 			productName = "Experiment 6";
 			productReference = 8C4F99542A1E3B3B00277C6A /* Experiment 6 */;
 			productType = "com.apple.product-type.tool";
@@ -106,6 +354,9 @@
 				Base,
 			);
 			mainGroup = 8C4F994B2A1E3B3B00277C6A;
+			packageReferences = (
+				8C4F99CD2A1E540E00277C6A /* XCRemoteSwiftPackageReference "PythonKit" */,
+			);
 			productRefGroup = 8C4F99552A1E3B3B00277C6A /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -120,7 +371,20 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8CB6F30F2A309F9700E08C8A /* Selection.swift in Sources */,
+				8C4F99622A1E3B6100277C6A /* ReadFiles.swift in Sources */,
+				8C4F99C32A1E3D4600277C6A /* Miscellaneous.swift in Sources */,
+				8C4F99C82A1E4E7400277C6A /* Initialise.swift in Sources */,
 				8C4F99582A1E3B3B00277C6A /* main.swift in Sources */,
+				8C4F99C62A1E4A7F00277C6A /* GeneticAlgorithm.swift in Sources */,
+				8CAD3F8B2A31F7DC00B55710 /* MultiObjectiveArchive.swift in Sources */,
+				8C4F99CC2A1E53ED00277C6A /* PlotGraphs.swift in Sources */,
+				8C806DC62A2A1BCE00D8B376 /* Roulette.swift in Sources */,
+				8C4F99612A1E3B6100277C6A /* Readfile.swift in Sources */,
+				8C4F99CA2A1E4EB100277C6A /* Routine.swift in Sources */,
+				8C7741EA2A279ACE003AC37F /* Evaluate.swift in Sources */,
+				8CA718622A2DF19D0055279F /* Mutation.swift in Sources */,
+				8C4F99632A1E3B6100277C6A /* Customer.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -243,6 +507,7 @@
 		8C4F995C2A1E3B3B00277C6A /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = "Experiment 6/Experiment 6.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = Q7KHHPX4EM;
 				ENABLE_HARDENED_RUNTIME = YES;
@@ -254,6 +519,7 @@
 		8C4F995D2A1E3B3B00277C6A /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = "Experiment 6/Experiment 6.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = Q7KHHPX4EM;
 				ENABLE_HARDENED_RUNTIME = YES;
@@ -284,6 +550,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		8C4F99CD2A1E540E00277C6A /* XCRemoteSwiftPackageReference "PythonKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "git@github.com:pvieito/PythonKit.git";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		8C4F99CE2A1E540E00277C6A /* PythonKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8C4F99CD2A1E540E00277C6A /* XCRemoteSwiftPackageReference "PythonKit" */;
+			productName = PythonKit;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 8C4F994C2A1E3B3B00277C6A /* Project object */;
 }
