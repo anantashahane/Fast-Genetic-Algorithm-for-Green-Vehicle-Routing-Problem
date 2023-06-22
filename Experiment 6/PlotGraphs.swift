@@ -91,7 +91,9 @@ func PlotParetoFronts(for fronts : [[Routine]], run: Int, benchmark: String) {
     CreateFolder(named: benchmark)
     plt.figure(figsize: [16, 16])
     for (index, front) in fronts.enumerated() {
-        plt.scatter(x: front.map({$0.GetFitness(for: .Distance)}), y: front.map({$0.GetFitness(for: .Fuel)}), label: "Front \(index)")
+        let individuals = front.sorted(by: {$0.GetFitness(for: .Distance) < $1.GetFitness(for: .Distance)})
+        plt.scatter(x: individuals.map({$0.GetFitness(for: .Distance)}), y: individuals.map({$0.GetFitness(for: .Fuel)}), label: "Front \(index)")
+        plt.plot(individuals.map({$0.GetFitness(for: .Distance)}), individuals.map({$0.GetFitness(for: .Fuel)}), linewidth: 1.2)
     }
     plt.xlabel(ObjectiveParameter.Distance.rawValue)
     plt.ylabel(ObjectiveParameter.Fuel.rawValue)

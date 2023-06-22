@@ -55,3 +55,15 @@ func GetDotProduct(truck : Truck, toCustomer: Customer, fromCustomer: Customer, 
     returnValue *= (normalisedVector.0 * truckVector.0 + normalisedVector.1 * truckVector.1)
     return returnValue
 }
+
+func GetDotProduct(projector : Truck, projectee: Truck, fromCustomer: Customer, maxDistance : Double) -> Double {
+    //Returns (Dmax/D) * (v1 . v2) / v1 with truck projection on a customer.
+    let projectorCom = projector.GetCentreOfMass()
+    let projecteeCom = projectee.GetCentreOfMass()
+    let distance = GetDistance(x: projectorCom, y: projecteeCom)
+    let normalisedVector = ((projecteeCom.0 - fromCustomer.x) / distance, (projectorCom.1 - fromCustomer.y) / distance)
+    let truckVector = (projectorCom.0 - fromCustomer.x, projectorCom.1 - fromCustomer.y)
+    var returnValue = maxDistance / distance
+    returnValue *= (normalisedVector.0 * truckVector.0 + normalisedVector.1 * truckVector.1)
+    return returnValue
+}

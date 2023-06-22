@@ -51,7 +51,7 @@ extension GeneticAlgorithm {
     }
     
     func CrowdingDistance(front : [Routine]) -> [Routine] {
-        if front.count == 0 {
+        if front.count <= 1 {
             return []
         }
         var pop = [(Routine, Double)]()

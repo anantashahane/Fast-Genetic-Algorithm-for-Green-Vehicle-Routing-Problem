@@ -26,7 +26,7 @@ func ReadFiles(benchmarkNameContains : String? = nil) -> [String] {
         }
     }
     if let benchmarkNameContains = benchmarkNameContains {
-        return dataset.filter({$0.contains(benchmarkNameContains)})
+        return dataset.filter({$0.contains(benchmarkNameContains)}).sorted()
     }
-    return dataset
+    return dataset.sorted()
 }
