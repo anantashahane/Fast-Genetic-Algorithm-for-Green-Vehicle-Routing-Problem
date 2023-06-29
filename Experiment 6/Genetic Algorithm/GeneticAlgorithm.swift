@@ -38,4 +38,21 @@ class GeneticAlgorithm {
         
         (maxDistance, distanceMatrix) = GetDistanceMatrix(Customers: customers)
     }
+    
+    func RunAlgorithm(iterationCount : Int) -> [Routine] {
+        Initialise()
+        Evaluate(parent: true)
+        for gen in 1...iterationCount {
+            MutatePopulation()
+            Evaluate()
+            Selection()
+            _ = ArchiveSolution()
+//            lastUpdate = success ? generation : lastUpdate
+            let distance = archive.GetArchive().map({$0.GetFitness(for: .Distance)})
+            let fuel = archive.GetArchive().map({$0.GetFitness(for: .Fuel)})
+            let rank = parentPopulation.map({$0.rank}).max() ?? 1
+            print("Generation \(gen) Archive Range: Distance [\(String(format: "%.2f", distance.min()!)), \(String(format: "%.2f", distance.max()!))], Fuel [\(String(format: "%.2f", fuel.min()!)), \(String(format: "%.2f", fuel.max()!))], fronts \(paretoFronts.count), archive size \(archive.GetArchive().count).")
+        }
+        return archive.GetArchive()
+    }
 }

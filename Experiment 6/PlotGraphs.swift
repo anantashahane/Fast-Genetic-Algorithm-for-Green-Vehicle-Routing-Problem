@@ -59,7 +59,7 @@ func PlotPath(for routine: Routine, of customers: [Customer], runNumber: Int, id
     plt.axis("equal")
     plt.savefig("\(benchmark)/Path (\(runNumber) \(id))")
     plt.clf() 
-    plt.close()
+    plt.close("all")
 }
 
 func plotGenerationProgression(lowestDistance: [Double], highestDistance: [Double], averageDistance: [Double], lowestFuel : [Double], highestFuel : [Double], averageFuel : [Double], runNumber: Int) {
@@ -72,7 +72,7 @@ func plotGenerationProgression(lowestDistance: [Double], highestDistance: [Doubl
     plt.legend()
     plt.savefig("Temp/Generation Analysis \(runNumber)")
     plt.clf()
-    plt.close()
+    plt.close("all")
 }
 
 func PlotBestSolutions(for solutions: [Routine]) {
@@ -84,7 +84,7 @@ func PlotBestSolutions(for solutions: [Routine]) {
     plt.grid()
     plt.savefig("Temp/Best Solutions")
     plt.clf()
-    plt.close()
+    plt.close("all")
 }
 
 func PlotParetoFronts(for fronts : [[Routine]], run: Int, benchmark: String) {
@@ -102,5 +102,5 @@ func PlotParetoFronts(for fronts : [[Routine]], run: Int, benchmark: String) {
     plt.title("Pareto Front Run \(run), Count \(fronts[0].count)")
     plt.savefig("\(benchmark)/Pareto Front \(run) (\(fronts[0].count))")
     plt.clf()
-    plt.close()
+    plt.close("all")
 }

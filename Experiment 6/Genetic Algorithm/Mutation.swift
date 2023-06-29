@@ -10,14 +10,19 @@ import Foundation
 extension GeneticAlgorithm {
     
     func MutatePopulation() {
+        let hightestRank = parentPopulation.map({$0.frontNumber}).max() ?? 1
+
         offspringPopulation = []
         for individual in parentPopulation {
-            let randomNumber = SpinRouletteWheel(strictness: 6, onCandidates: Array(1...4))
+//            let strictness = Double(hightestRank - individual.frontNumber) * 0.25
+            let randomNumber = SpinRouletteWheel(strictness: 2, onCandidates: Array(1...5))
+//            let randomNumber = SpinRouletteWheel(strictness: strictness, onCandidates: Array(1...5))
             switch randomNumber {
             case 1: offspringPopulation.append(TSPMutation(individual: individual))
             case 2: offspringPopulation.append(CustomerTransferMutation(individual: individual))
             case 3: offspringPopulation.append(CustomerExchangeMutation(individual: individual))
-            default: offspringPopulation.append(TruckCrossover(individual: individual))
+            case 4: offspringPopulation.append(TruckCrossover(individual: individual))
+            default: offspringPopulation.append(LNS(individual: individual))
             }
         }
     }
@@ -150,14 +155,54 @@ extension GeneticAlgorithm {
                     for customer in Truck2inCustomers {
                         truck2.element.AddCustomer(customer: customer, allCustomers: Customers.values)
                     }
-                    if truck1.element.GetDemand() <= vehicleCapacity && truck1.element.GetDemand() <= vehicleCapacity {
+                    if truck1.element.GetDemand() <= vehicleCapacity && truck2.element.GetDemand() <= vehicleCapacity {
                         returnIndividual.trucks[truck1.offset] = truck1.element
                         returnIndividual.trucks[truck2.offset] = truck2.element
-                    } else {
-                        print("Caught cheating.")
                     }
                 }
             }
+        }
+        return returnIndividual
+    }
+    
+    func LNS(individual : Routine) -> Routine {
+        var freeCustomerIDs = [Int]()
+        var returnIndividual = individual
+        let strictness0 = pow(2.71, Double(np.random.normal(0, 1))!)
+        let strictness1 = pow(2.71, Double(np.random.normal(1, 1))!)
+        for (id, truck) in returnIndividual.trucks.enumerated() {
+            let emitterCount = Int.random(in: 0...(truck.sequence.count / 2))
+            if emitterCount != 0 {
+                var customers = truck.GetDistanceSequence(customers: Customers.values)
+                for _ in 1...emitterCount {
+                    if let emittedCustomer = SpinRouletteWheel(strictness: strictness0, onCandidates: customers) {
+                        freeCustomerIDs.append(emittedCustomer)
+                        customers = customers.filter({$0 != emittedCustomer})
+                        _ = returnIndividual.trucks[id].RemoveCustomer(customer: Customers[emittedCustomer]!, allCustomers: Customers.values)
+                    }
+                }
+            }
+        }
+        let freeCustomers = freeCustomerIDs.map({Customers[$0]!})
+        for customer in freeCustomers {
+            let candidateTrucks = returnIndividual.trucks.enumerated().filter({$0.element.CanAccept(customer: customer, capacity: vehicleCapacity)}).sorted(by:{
+                GetDotProduct(truck: $0.element, toCustomer: customer, fromCustomer: Depot, maxDistance: maxDistance) > GetDotProduct(truck: $1.element, toCustomer: customer, fromCustomer: Depot, maxDistance: maxDistance)
+            })
+            if let truck = SpinRouletteWheel(strictness: strictness1, onCandidates: candidateTrucks) {
+                let targetCustomerIDs = truck.element.sequence.enumerated()
+                let customers = targetCustomerIDs.map({($0.offset, Customers[$0.element]!)}).sorted(by: {
+                    GetDotProduct(shadow: $0.1, onCustomer: customer, fromCustomer: Depot, maxDistance: maxDistance) > GetDotProduct(shadow: $1.1, onCustomer: customer, fromCustomer: Depot, maxDistance: maxDistance)
+                })
+                if customers.isEmpty {
+                    returnIndividual.trucks[truck.offset].AddCustomer(customer: customer, allCustomers: Customers.values)
+                } else {
+                    returnIndividual.trucks[truck.offset].AddCustomer(customer: customer, atIndex: customers[0].0, allCustomers: Customers.values)
+                }
+                freeCustomerIDs = freeCustomerIDs.filter({$0 != customer.id})
+            }
+        }
+        if !freeCustomerIDs.isEmpty {
+            return individual
         }
         return returnIndividual
     }

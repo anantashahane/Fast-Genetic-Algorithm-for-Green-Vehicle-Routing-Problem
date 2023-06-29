@@ -7,28 +7,20 @@
 
 import Foundation
 
-let files = ReadFiles(benchmarkNameContains: "A")
+let files = ReadFiles(benchmarkNameContains: "P")
 let clock = ContinuousClock()
-for file in files {
+for (index, file) in files.enumerated() {
     let benchmarkName = file.split(separator: "/").last!.split(separator: ".").first!
-    print("–––––––––––––––––––––––––\(benchmarkName)–––––––––––––––––––––––––")
-    
+    print("–––––––––––––––––––––––––(\(index + 1)/\(files.count)) \(benchmarkName)–––––––––––––––––––––––––")
     let ge = GeneticAlgorithm(fileName: file, populationSize: 100)
+    var archive = [Routine]()
     let result = clock.measure {
-        ge.Initialise()
-        ge.Evaluate(parent: true)
-        for i in 1...500 {
-            let distance = ge.parentPopulation.map({$0.GetFitness(for: .Distance)})
-            let fuel = ge.parentPopulation.map({$0.GetFitness(for: .Fuel)})
-            print("Generation \(i) Distance [\(String(format: "%.2f", distance.min()!)), \(String(format: "%.2f", distance.max()!))], Fuel [\(String(format: "%.2f", fuel.min()!)), \(String(format: "%.2f", fuel.max()!))], archive size \(ge.archive.GetArchive().count).")
-            ge.MutatePopulation()
-            ge.Evaluate()
-            ge.Selection()
-            ge.ArchiveSolution()
-        }
+        archive = ge.RunAlgorithm(iterationCount: 500)
     }
     print("Took \(result).")
-    for (index, individual) in ge.archive.GetArchive().enumerated() {
+    
+    
+    for (index, individual) in archive.enumerated() {
         PlotPath(for: individual, of: ge.Customers.values + [ge.Depot], runNumber: 1, id: index + 1, benchmark: String(benchmarkName))
     }
     PlotParetoFronts(for: ge.paretoFronts, run: -1, benchmark: String(benchmarkName))

@@ -11,8 +11,8 @@ extension GeneticAlgorithm {
     
     func Initialise() {
         archive.ClearArchive()
-        for i in 1...populationSize {
-            if i % 10 == 0 {print("Generating individual \(i)")}
+        for _ in 1...populationSize {
+//            if i % 10 == 0 {print("Generating individual \(i)")}
             var flag = false
             var individual = Routine(trucks: [])
             while !flag {

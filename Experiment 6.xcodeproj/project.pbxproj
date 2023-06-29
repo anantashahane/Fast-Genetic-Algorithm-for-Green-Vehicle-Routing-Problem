@@ -126,7 +126,6 @@
 		8C4F99B62A1E3BB400277C6A /* P-n45-k5.vrp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "P-n45-k5.vrp"; sourceTree = "<group>"; };
 		8C4F99B72A1E3BB400277C6A /* A-n64-k9.vrp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "A-n64-k9.vrp"; sourceTree = "<group>"; };
 		8C4F99B82A1E3BB400277C6A /* P-n50-k7.vrp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "P-n50-k7.vrp"; sourceTree = "<group>"; };
-		8C4F99B92A1E3BB500277C6A /* P-n55-k15.vrp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "P-n55-k15.vrp"; sourceTree = "<group>"; };
 		8C4F99BA2A1E3BB500277C6A /* A-n80-k10.vrp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "A-n80-k10.vrp"; sourceTree = "<group>"; };
 		8C4F99BB2A1E3BB500277C6A /* E-n101-k8.vrp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "E-n101-k8.vrp"; sourceTree = "<group>"; };
 		8C4F99BC2A1E3BB500277C6A /* M-n121-k7.vrp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "M-n121-k7.vrp"; sourceTree = "<group>"; };
@@ -282,7 +281,6 @@
 				8C4F99A32A1E3BB300277C6A /* P-n55-k7.vrp */,
 				8C4F99A72A1E3BB300277C6A /* P-n55-k8.vrp */,
 				8C4F99A22A1E3BB300277C6A /* P-n55-k10.vrp */,
-				8C4F99B92A1E3BB500277C6A /* P-n55-k15.vrp */,
 				8C4F997A2A1E3BB100277C6A /* P-n60-k10.vrp */,
 				8C4F99BF2A1E3BB500277C6A /* P-n60-k15.vrp */,
 				8C4F99772A1E3BB000277C6A /* P-n65-k10.vrp */,

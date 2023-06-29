@@ -190,6 +190,7 @@ struct Routine {
     var dominatesSetIndex = [Int]()                 //Set of individuals that this individual dominate.
     var dominatedByNumber = 0                       //Count of individual that dominates this individual.
     var rank = 0
+    var frontNumber = 0
     init(trucks: [Truck]) {
         self.trucks = trucks
         strictness = 1.0

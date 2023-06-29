@@ -27,6 +27,7 @@ extension GeneticAlgorithm {
             }
             if population[pid].dominatedByNumber == 0 {
                 population[pid].rank = 1
+                population[pid].frontNumber = 1
                 front1.append(population[pid])
             }
         }
@@ -45,6 +46,9 @@ extension GeneticAlgorithm {
                 }
             }
             i += 1
+            for j in 0..<nextFront.count {
+                nextFront[j].frontNumber = i + 1
+            }
             fronts.append(nextFront)
         }
         paretoFronts = fronts
@@ -52,7 +56,7 @@ extension GeneticAlgorithm {
     
     func CrowdingDistance(front : [Routine]) -> [Routine] {
         if front.count <= 1 {
-            return []
+            return front
         }
         var pop = [(Routine, Double)]()
         let length = front.count
@@ -91,8 +95,9 @@ extension GeneticAlgorithm {
         parentPopulation += population[0..<remainingPopulationSize]
     }
     
-    func ArchiveSolution() {
-        _ = offspringPopulation.map({archive.AddSolution(solution: $0)})
+    func ArchiveSolution() -> Bool {
+        let tt = offspringPopulation.map({archive.AddSolution(solution: $0)})
+        return tt.contains(true)
     }
     
 }
