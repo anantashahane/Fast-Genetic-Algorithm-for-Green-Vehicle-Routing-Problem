@@ -10,13 +10,15 @@ import Foundation
 extension GeneticAlgorithm {
     
     func MutatePopulation() {
-        let hightestRank = parentPopulation.map({$0.frontNumber}).max() ?? 1
-
+//        let hightestRank = parentPopulation.map({$0.frontNumber}).max() ?? 1
+//        var usageData = Array(repeating: 0, count: 5)
+//        let oldOffspringPopulation = parentPopulation
         offspringPopulation = []
         for individual in parentPopulation {
 //            let strictness = Double(hightestRank - individual.frontNumber) * 0.25
             let randomNumber = SpinRouletteWheel(strictness: 2, onCandidates: Array(1...5))
 //            let randomNumber = SpinRouletteWheel(strictness: strictness, onCandidates: Array(1...5))
+//            usageData[randomNumber! - 1] += 1
             switch randomNumber {
             case 1: offspringPopulation.append(TSPMutation(individual: individual))
             case 2: offspringPopulation.append(CustomerTransferMutation(individual: individual))
@@ -25,20 +27,21 @@ extension GeneticAlgorithm {
             default: offspringPopulation.append(LNS(individual: individual))
             }
         }
+//        print("\tUsage data: [2OptM, CTM, CEM, TX, LNS]: \(usageData).")
     }
     
-    func TSPMutation(individual : Routine) -> Routine {
+    private func TSPMutation(individual : Routine) -> Routine {
         //Does the Alpha * current distance 2-opt search, an modification of 2-opt mutator, to optimise for searching for more fuel-distance pareto-front.
         var returnIndividual = individual
         if let mutationTruck = returnIndividual.trucks.enumerated().filter({$0.element.sequence.count > 2}).randomElement() {
             var sequence = mutationTruck.element.sequence
-            let alpha = pow(2.71, Double(np.random.normal(0, 1))!) * mutationTruck.element.GetAlpha()
+            let alpha = pow(2.71, Double.NormalRandom(mu: 0, sigma: 1)) * mutationTruck.element.GetAlpha()
             returnIndividual.trucks[mutationTruck.offset].SetAlpha(to: alpha)
             if let randomCustomer = sequence[0..<sequence.count - 1].randomElement() {
                 let randomCustomerIndex = sequence.enumerated().filter({$0.element == randomCustomer}).first!.offset
                 let distanceToBeat = distanceMatrix[randomCustomer][sequence[randomCustomerIndex + 1]] * alpha
                 let candidateCustomers = sequence.enumerated().filter({distanceMatrix[randomCustomer][$0.element] < distanceToBeat}).sorted(by: {distanceMatrix[randomCustomer][$0.element] < distanceMatrix[randomCustomer][$1.element]})
-                if let mutationPoint = SpinRouletteWheel(strictness: pow(2.71, Double(np.random.normal(0, 1))!), onCandidates: candidateCustomers) {
+                if let mutationPoint = SpinRouletteWheel(strictness: pow(2.71, Double.NormalRandom(mu: 0, sigma: 1)), onCandidates: candidateCustomers) {
                     sequence = Array(sequence[0..<min(randomCustomerIndex, mutationPoint.offset)] + sequence[min(randomCustomerIndex, mutationPoint.offset)..<max(randomCustomerIndex, mutationPoint.offset)].reversed() + sequence[max(randomCustomerIndex, mutationPoint.offset)..<sequence.count])
                     returnIndividual.trucks[mutationTruck.offset].sequence = sequence
                 } else {
@@ -52,20 +55,20 @@ extension GeneticAlgorithm {
         return returnIndividual
     }
     
-    func CustomerTransferMutation(individual : Routine) -> Routine {
+    private func CustomerTransferMutation(individual : Routine) -> Routine {
         // Transfers the customers from heaviest truck to the truck that can easily take care of that customer.
         var returnIndividual = individual
-        var strictness = pow(2.71, Double(np.random.normal(0,1))!)
-        let rouletteTruck = individual.trucks.enumerated().sorted(by: {$0.element.GetDemand() > $1.element.GetDemand()}).filter({!$0.element.sequence.isEmpty})
+        var strictness = 0.0
+        let rouletteTruck = individual.trucks.enumerated().filter({!$0.element.sequence.isEmpty})
         if let emitterTruck = SpinRouletteWheel(strictness: strictness, onCandidates: rouletteTruck) {
             let transferCustomerCandidates = emitterTruck.element.GetDistanceSequence(customers: Customers.values)
-            strictness = pow(2.71, Double(np.random.normal(1, 1))!)
+            strictness = pow(2.71, Double.NormalRandom(mu: Double(individual.frontNumber), sigma: 1))
             let transferCustomerID = SpinRouletteWheel(strictness: strictness, onCandidates: transferCustomerCandidates) ?? transferCustomerCandidates[0]
             let transferCustomer = Customers[transferCustomerID]!
             let truckCandidates = individual.trucks.enumerated().filter({$0.element.GetID() != emitterTruck.element.GetID() && $0.element.CanAccept(customer: transferCustomer, capacity: vehicleCapacity)}).sorted(by: {
                 GetDotProduct(truck: $0.element, toCustomer: transferCustomer, fromCustomer: Depot, maxDistance: maxDistance) > GetDotProduct(truck: $1.element, toCustomer: transferCustomer, fromCustomer: Depot, maxDistance: maxDistance)
             })
-            strictness = pow(2.71, Double(np.random.normal(0, 1))!)
+            strictness = pow(2.71, Double.NormalRandom(mu: Double(individual.frontNumber), sigma: 1))
             if let acceptingTruck = SpinRouletteWheel(strictness: strictness, onCandidates: truckCandidates) {
                 _ = returnIndividual.trucks[emitterTruck.offset].RemoveCustomer(customer: transferCustomer, allCustomers: Customers.values)
                 let customers = acceptingTruck.element.sequence.enumerated().sorted(by: {
@@ -81,12 +84,12 @@ extension GeneticAlgorithm {
         return returnIndividual
     }
     
-    func CustomerExchangeMutation(individual : Routine) -> Routine {
+    private func CustomerExchangeMutation(individual : Routine) -> Routine {
         //Selects two customers from different truck, with minimal exchange cost, and exchanges their assigned truck.
         var returnIndividual = individual
         let candidateTrucks = individual.trucks.enumerated().filter({$0.element.GetDemand() > 0})
         if let transferTruck1 = SpinRouletteWheel(strictness: 0, onCandidates: candidateTrucks) {
-            var strictness = pow(2.71, Double(np.random.normal(0, 1))!)
+            var strictness = pow(2.71, Double.NormalRandom(mu: Double(individual.frontNumber), sigma: 1))
             let t1OutCandidates = transferTruck1.element.GetDistanceSequence(customers: Customers.values)
             let customerfromTruck1ID = SpinRouletteWheel(strictness: strictness, onCandidates: t1OutCandidates) ?? t1OutCandidates[0]
             let customerfromTruck1 = Customers[customerfromTruck1ID]!
@@ -101,7 +104,7 @@ extension GeneticAlgorithm {
             }
             truckCustomerIDTuple = truckCustomerIDTuple.sorted(by: {
                 GetDotProduct(shadow: Customers[$0.1]!, onCustomer: customerfromTruck1, fromCustomer: Depot, maxDistance: maxDistance) > GetDotProduct(shadow: Customers[$1.1]!, onCustomer: customerfromTruck1, fromCustomer: Depot, maxDistance: maxDistance)})
-            strictness = pow(2.71, Double(np.random.normal(1, 1))!)
+            strictness = pow(2.71, Double.NormalRandom(mu: Double(individual.frontNumber), sigma: 1))
             if let luckyTruckCustomerID = SpinRouletteWheel(strictness: strictness, onCandidates: truckCustomerIDTuple) {
                 let customerfromTruck2 = Customers[luckyTruckCustomerID.1]!
                 let t1Index = returnIndividual.trucks[transferTruck1.offset].RemoveCustomer(customer: customerfromTruck1, allCustomers: Customers.values)
@@ -113,7 +116,7 @@ extension GeneticAlgorithm {
         return returnIndividual
     }
     
-    func TruckCrossover(individual : Routine) -> Routine {
+    private func TruckCrossover(individual : Routine) -> Routine {
         var returnIndividual = individual
         var remainingTrucks = Array(returnIndividual.trucks.enumerated())
         var truck1 = SpinRouletteWheel(strictness: 0, onCandidates: remainingTrucks)!
@@ -121,7 +124,7 @@ extension GeneticAlgorithm {
         remainingTrucks = remainingTrucks.sorted(by: {
             GetDotProduct(projector: $0.element, projectee: truck1.element, fromCustomer: Depot, maxDistance: maxDistance) > GetDotProduct(projector: $1.element, projectee: truck1.element, fromCustomer: Depot, maxDistance: maxDistance)
         })
-        var truck2 = SpinRouletteWheel(strictness: pow(2.71, Double(np.random.normal(0, 1))!), onCandidates: remainingTrucks)!
+        var truck2 = SpinRouletteWheel(strictness: pow(2.71, Double.NormalRandom(mu: Double(individual.frontNumber), sigma: 1)), onCandidates: remainingTrucks)!
         
         if truck1.element.sequence.isEmpty {
             let splitPoint = Int.random(in: 1..<truck2.element.sequence.count)
@@ -165,13 +168,13 @@ extension GeneticAlgorithm {
         return returnIndividual
     }
     
-    func LNS(individual : Routine) -> Routine {
+    private func LNS(individual : Routine) -> Routine {
         var freeCustomerIDs = [Int]()
         var returnIndividual = individual
-        let strictness0 = pow(2.71, Double(np.random.normal(0, 1))!)
-        let strictness1 = pow(2.71, Double(np.random.normal(1, 1))!)
+        let strictness0 = pow(2.71, Double.NormalRandom(mu: Double(individual.frontNumber), sigma: 2))
+        let strictness1 = pow(2.71, Double.NormalRandom(mu: Double(individual.frontNumber), sigma: 1))
         for (id, truck) in returnIndividual.trucks.enumerated() {
-            let emitterCount = Int.random(in: 0...(truck.sequence.count / 2))
+            let emitterCount = Int.random(in: 0...(5 * truck.sequence.count / 6))
             if emitterCount != 0 {
                 var customers = truck.GetDistanceSequence(customers: Customers.values)
                 for _ in 1...emitterCount {

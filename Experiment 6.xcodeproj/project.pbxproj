@@ -22,6 +22,7 @@
 		8CA718622A2DF19D0055279F /* Mutation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA718612A2DF19D0055279F /* Mutation.swift */; };
 		8CAD3F8B2A31F7DC00B55710 /* MultiObjectiveArchive.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CAD3F8A2A31F7DC00B55710 /* MultiObjectiveArchive.swift */; };
 		8CB6F30F2A309F9700E08C8A /* Selection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CB6F30E2A309F9700E08C8A /* Selection.swift */; };
+		8CFFF29C2A52E5F000E1F49C /* Crossover.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CFFF29B2A52E5F000E1F49C /* Crossover.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -145,6 +146,7 @@
 		8CA718612A2DF19D0055279F /* Mutation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mutation.swift; sourceTree = "<group>"; };
 		8CAD3F8A2A31F7DC00B55710 /* MultiObjectiveArchive.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MultiObjectiveArchive.swift; sourceTree = "<group>"; };
 		8CB6F30E2A309F9700E08C8A /* Selection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Selection.swift; sourceTree = "<group>"; };
+		8CFFF29B2A52E5F000E1F49C /* Crossover.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Crossover.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -301,6 +303,7 @@
 				8C806DC52A2A1BCE00D8B376 /* Roulette.swift */,
 				8CA718612A2DF19D0055279F /* Mutation.swift */,
 				8CB6F30E2A309F9700E08C8A /* Selection.swift */,
+				8CFFF29B2A52E5F000E1F49C /* Crossover.swift */,
 			);
 			path = "Genetic Algorithm";
 			sourceTree = "<group>";
@@ -371,6 +374,7 @@
 			files = (
 				8CB6F30F2A309F9700E08C8A /* Selection.swift in Sources */,
 				8C4F99622A1E3B6100277C6A /* ReadFiles.swift in Sources */,
+				8CFFF29C2A52E5F000E1F49C /* Crossover.swift in Sources */,
 				8C4F99C32A1E3D4600277C6A /* Miscellaneous.swift in Sources */,
 				8C4F99C82A1E4E7400277C6A /* Initialise.swift in Sources */,
 				8C4F99582A1E3B3B00277C6A /* main.swift in Sources */,

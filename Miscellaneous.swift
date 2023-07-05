@@ -67,3 +67,15 @@ func GetDotProduct(projector : Truck, projectee: Truck, fromCustomer: Customer, 
     returnValue *= (normalisedVector.0 * truckVector.0 + normalisedVector.1 * truckVector.1)
     return returnValue
 }
+
+extension Double {
+    static func NormalRandom(mu: Double, sigma: Double) -> Double {
+        let u1 = Double.random(in: 0...1)
+        let u2 = Double.random(in: 0...1)
+        
+        let z0 = sqrt(-2 * log(u1)) * cos(2 * .pi * u2)
+        let randomNumber = z0 * sigma + mu
+        
+        return randomNumber
+    }
+}

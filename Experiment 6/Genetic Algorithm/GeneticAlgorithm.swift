@@ -6,12 +6,8 @@
 //
 
 import Foundation
-import PythonKit
 
 class GeneticAlgorithm {
-    //Dependancies
-    let np = Python.import("numpy")
-    
     //Constants.
     let Depot : Customer
     let maxDistance : Double
@@ -43,6 +39,7 @@ class GeneticAlgorithm {
         Initialise()
         Evaluate(parent: true)
         for gen in 1...iterationCount {
+//            CrossoverPopulation()
             MutatePopulation()
             Evaluate()
             Selection()
@@ -50,9 +47,17 @@ class GeneticAlgorithm {
 //            lastUpdate = success ? generation : lastUpdate
             let distance = archive.GetArchive().map({$0.GetFitness(for: .Distance)})
             let fuel = archive.GetArchive().map({$0.GetFitness(for: .Fuel)})
-            let rank = parentPopulation.map({$0.rank}).max() ?? 1
             print("Generation \(gen) Archive Range: Distance [\(String(format: "%.2f", distance.min()!)), \(String(format: "%.2f", distance.max()!))], Fuel [\(String(format: "%.2f", fuel.min()!)), \(String(format: "%.2f", fuel.max()!))], fronts \(paretoFronts.count), archive size \(archive.GetArchive().count).")
         }
         return archive.GetArchive()
+    }
+    
+    func GetCustomers() -> [Customer] {
+        let customers = Customers.values + [Depot]
+        return customers
+    }
+    
+    func GetFronts() -> [[Routine]] {
+        return paretoFronts
     }
 }

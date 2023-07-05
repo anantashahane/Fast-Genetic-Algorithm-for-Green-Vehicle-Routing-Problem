@@ -22,7 +22,7 @@ extension GeneticAlgorithm {
         }
     }
     
-    func GetSeed(balanced : Bool) -> (Bool, Routine) {
+    private func GetSeed(balanced : Bool) -> (Bool, Routine) {
         var trucks = [Truck]()
         var remainingCustomers = Array(Customers.values)
         let totalDemand = remainingCustomers.map({$0.demand}).reduce(0, +)

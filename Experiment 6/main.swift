@@ -7,7 +7,7 @@
 
 import Foundation
 
-let files = ReadFiles(benchmarkNameContains: "P")
+let files = ReadFiles(benchmarkNameContains: "M-n200-k17")
 let clock = ContinuousClock()
 for (index, file) in files.enumerated() {
     let benchmarkName = file.split(separator: "/").last!.split(separator: ".").first!
@@ -21,9 +21,9 @@ for (index, file) in files.enumerated() {
     
     
     for (index, individual) in archive.enumerated() {
-        PlotPath(for: individual, of: ge.Customers.values + [ge.Depot], runNumber: 1, id: index + 1, benchmark: String(benchmarkName))
+        PlotPath(for: individual, of: ge.GetCustomers(), runNumber: 1, id: index + 1, benchmark: String(benchmarkName))
     }
-    PlotParetoFronts(for: ge.paretoFronts, run: -1, benchmark: String(benchmarkName))
-    PlotParetoFronts(for: [ge.archive.GetArchive()], run: 1, benchmark: String(benchmarkName))
+    PlotParetoFronts(for: ge.GetFronts(), run: -1, benchmark: String(benchmarkName))
+    PlotParetoFronts(for: [archive], run: 1, benchmark: String(benchmarkName))
 }
 
