@@ -7,7 +7,7 @@
 
 import Foundation
 
-let files = ReadFiles(benchmarkNameContains: "M-n200-k17")
+let files = ReadFiles(benchmarkNameContains: "E")
 let clock = ContinuousClock()
 for (index, file) in files.enumerated() {
     let benchmarkName = file.split(separator: "/").last!.split(separator: ".").first!
@@ -22,6 +22,9 @@ for (index, file) in files.enumerated() {
     
     for (index, individual) in archive.enumerated() {
         PlotPath(for: individual, of: ge.GetCustomers(), runNumber: 1, id: index + 1, benchmark: String(benchmarkName))
+    }
+    if let data = EncodeParetoFront(benchmarkName: String(benchmarkName), frontRoutines: archive, Optimality: ge.optimal) {
+        SaveFront(data: data, benchmarkName: String(benchmarkName))
     }
     PlotParetoFronts(for: ge.GetFronts(), run: -1, benchmark: String(benchmarkName))
     PlotParetoFronts(for: [archive], run: 1, benchmark: String(benchmarkName))

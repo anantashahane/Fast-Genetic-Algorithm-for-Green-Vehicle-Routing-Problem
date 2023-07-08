@@ -16,7 +16,7 @@ class GeneticAlgorithm {
     let Customers : [Int : Customer]
     let distanceMatrix : [[Double]]
     let populationSize : Int
-    
+    let optimal : Int?
     //Variables
     var parentPopulation = [Routine]()
     var offspringPopulation = [Routine]()
@@ -26,7 +26,8 @@ class GeneticAlgorithm {
     init(fileName: String, populationSize: Int) {
         self.populationSize = populationSize
         
-        let (numberofTrucks, customers, capacity) = Readfile(filePath: fileName)
+        let (numberofTrucks, customers, capacity, opt) = Readfile(filePath: fileName)
+        optimal = opt
         numberOfTrucks = numberofTrucks
         Customers = Dictionary(uniqueKeysWithValues: customers.filter({$0.customerType == .Customer}).map({($0.id, $0)}))
         Depot = customers.filter({$0.customerType == .Depot}).first!
@@ -47,9 +48,15 @@ class GeneticAlgorithm {
 //            lastUpdate = success ? generation : lastUpdate
             let distance = archive.GetArchive().map({$0.GetFitness(for: .Distance)})
             let fuel = archive.GetArchive().map({$0.GetFitness(for: .Fuel)})
-            print("Generation \(gen) Archive Range: Distance [\(String(format: "%.2f", distance.min()!)), \(String(format: "%.2f", distance.max()!))], Fuel [\(String(format: "%.2f", fuel.min()!)), \(String(format: "%.2f", fuel.max()!))], fronts \(paretoFronts.count), archive size \(archive.GetArchive().count).")
+            if (gen % 10 == 0) {
+                if let optimal = optimal {
+                    print("Generation \(gen) currBest/optimal: \(String(format: "%.2f", distance.min()! * 100 / Double(optimal)))% (\(optimal)): Distance [\(String(format: "%.2f", distance.min()!)), \(String(format: "%.2f", distance.max()!))], Fuel [\(String(format: "%.2f", fuel.min()!)), \(String(format: "%.2f", fuel.max()!))], fronts \(paretoFronts.count), archive size \(archive.GetArchive().count).")
+                } else {
+                    print("Generation \(gen) Archive Range: Distance [\(String(format: "%.2f", distance.min()!)), \(String(format: "%.2f", distance.max()!))], Fuel [\(String(format: "%.2f", fuel.min()!)), \(String(format: "%.2f", fuel.max()!))], fronts \(paretoFronts.count), archive size \(archive.GetArchive().count).")
+                }
+            }
         }
-        return archive.GetArchive()
+        return archive.GetArchive().sorted(by: {$0.GetFitness(for: .Distance) < $1.GetFitness(for: .Distance)})
     }
     
     func GetCustomers() -> [Customer] {

@@ -7,7 +7,7 @@
 
 import Foundation
 
-func Readfile(filePath : String) -> (Int, [Customer], Int) {
+func Readfile(filePath : String) -> (Int, [Customer], Int, Int?) {
     var contentFromFile: String = ""
        do {
            // Read file content
@@ -19,6 +19,7 @@ func Readfile(filePath : String) -> (Int, [Customer], Int) {
        }
     let lines = contentFromFile.split(separator: "\n")
     
+    var optimal : Int? = nil
     var capacity = 0
     var currentSection = 0
     var ids = [Int]()
@@ -37,6 +38,11 @@ func Readfile(filePath : String) -> (Int, [Customer], Int) {
         if line.contains("CAPACITY") {
             let words = line.split(separator: " ")
             capacity = Int(words[2]) ?? 0
+        }
+        if line.contains("Optimal value") || line.contains("Best Value") || line.contains("Best value") {
+            let words = line.split(separator: " ")
+            let word = String(String(words.last!).split(separator: ")").last!)
+            optimal = Int(word)
         }
         else if line.contains("NODE_COORD") {
             currentSection = 1
@@ -68,5 +74,5 @@ func Readfile(filePath : String) -> (Int, [Customer], Int) {
         customers.last!.PrintData()
     }
     print("Number of trucks \(numOfTrucks)")
-    return (numOfTrucks, customers, capacity)
+    return (numOfTrucks, customers, capacity, optimal)
 }

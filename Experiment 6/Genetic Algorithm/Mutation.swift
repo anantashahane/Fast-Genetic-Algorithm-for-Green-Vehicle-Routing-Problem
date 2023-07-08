@@ -21,10 +21,10 @@ extension GeneticAlgorithm {
 //            usageData[randomNumber! - 1] += 1
             switch randomNumber {
             case 1: offspringPopulation.append(TSPMutation(individual: individual))
-            case 2: offspringPopulation.append(CustomerTransferMutation(individual: individual))
+            case 2: offspringPopulation.append(LNS(individual: individual))
             case 3: offspringPopulation.append(CustomerExchangeMutation(individual: individual))
             case 4: offspringPopulation.append(TruckCrossover(individual: individual))
-            default: offspringPopulation.append(LNS(individual: individual))
+            default: offspringPopulation.append(CustomerTransferMutation(individual: individual))
             }
         }
 //        print("\tUsage data: [2OptM, CTM, CEM, TX, LNS]: \(usageData).")
@@ -33,6 +33,15 @@ extension GeneticAlgorithm {
     private func TSPMutation(individual : Routine) -> Routine {
         //Does the Alpha * current distance 2-opt search, an modification of 2-opt mutator, to optimise for searching for more fuel-distance pareto-front.
         var returnIndividual = individual
+        if Double.random(in: 0...1) < 0.1 {
+            if let mutationTruck = Array(returnIndividual.trucks.enumerated()).randomElement() {
+                let count = mutationTruck.element.sequence.count
+                let randomPoint = Int.random(in: 0..<count)
+                let sequence = Array(mutationTruck.element.sequence[randomPoint..<count] + mutationTruck.element.sequence[0..<randomPoint])
+                returnIndividual.trucks[mutationTruck.offset].sequence = sequence
+                return returnIndividual
+            }
+        }
         if let mutationTruck = returnIndividual.trucks.enumerated().filter({$0.element.sequence.count > 2}).randomElement() {
             var sequence = mutationTruck.element.sequence
             let alpha = pow(2.71, Double.NormalRandom(mu: 0, sigma: 1)) * mutationTruck.element.GetAlpha()
@@ -42,7 +51,7 @@ extension GeneticAlgorithm {
                 let distanceToBeat = distanceMatrix[randomCustomer][sequence[randomCustomerIndex + 1]] * alpha
                 let candidateCustomers = sequence.enumerated().filter({distanceMatrix[randomCustomer][$0.element] < distanceToBeat}).sorted(by: {distanceMatrix[randomCustomer][$0.element] < distanceMatrix[randomCustomer][$1.element]})
                 if let mutationPoint = SpinRouletteWheel(strictness: pow(2.71, Double.NormalRandom(mu: 0, sigma: 1)), onCandidates: candidateCustomers) {
-                    sequence = Array(sequence[0..<min(randomCustomerIndex, mutationPoint.offset)] + sequence[min(randomCustomerIndex, mutationPoint.offset)..<max(randomCustomerIndex, mutationPoint.offset)].reversed() + sequence[max(randomCustomerIndex, mutationPoint.offset)..<sequence.count])
+                    sequence = Array(sequence[0..<min(randomCustomerIndex, mutationPoint.offset) + 1] + sequence[min(randomCustomerIndex, mutationPoint.offset) + 1..<max(randomCustomerIndex, mutationPoint.offset) + 1].reversed() + sequence[max(randomCustomerIndex, mutationPoint.offset) + 1..<sequence.count])
                     returnIndividual.trucks[mutationTruck.offset].sequence = sequence
                 } else {
                     let count = mutationTruck.element.sequence.count
@@ -171,7 +180,7 @@ extension GeneticAlgorithm {
     private func LNS(individual : Routine) -> Routine {
         var freeCustomerIDs = [Int]()
         var returnIndividual = individual
-        let strictness0 = pow(2.71, Double.NormalRandom(mu: Double(individual.frontNumber), sigma: 2))
+        let strictness0 = pow(2.71, Double.NormalRandom(mu: sqrt(Double(individual.frontNumber)), sigma: 2))
         let strictness1 = pow(2.71, Double.NormalRandom(mu: Double(individual.frontNumber), sigma: 1))
         for (id, truck) in returnIndividual.trucks.enumerated() {
             let emitterCount = Int.random(in: 0...(5 * truck.sequence.count / 6))

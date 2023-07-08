@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8C2084D52A58338F004A2DC5 /* LogFront.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C2084D42A58338F004A2DC5 /* LogFront.swift */; };
 		8C4F99582A1E3B3B00277C6A /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C4F99572A1E3B3B00277C6A /* main.swift */; };
 		8C4F99612A1E3B6100277C6A /* Readfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C4F995E2A1E3B6100277C6A /* Readfile.swift */; };
 		8C4F99622A1E3B6100277C6A /* ReadFiles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C4F995F2A1E3B6100277C6A /* ReadFiles.swift */; };
@@ -38,6 +39,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		8C2084D42A58338F004A2DC5 /* LogFront.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogFront.swift; sourceTree = "<group>"; };
 		8C4F99542A1E3B3B00277C6A /* Experiment 6 */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "Experiment 6"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8C4F99572A1E3B3B00277C6A /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		8C4F995E2A1E3B6100277C6A /* Readfile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Readfile.swift; sourceTree = "<group>"; };
@@ -191,6 +193,7 @@
 				8C4F99602A1E3B6100277C6A /* Customer.swift */,
 				8C4F995E2A1E3B6100277C6A /* Readfile.swift */,
 				8C4F995F2A1E3B6100277C6A /* ReadFiles.swift */,
+				8C2084D42A58338F004A2DC5 /* LogFront.swift */,
 			);
 			path = "Experiment 6";
 			sourceTree = "<group>";
@@ -376,6 +379,7 @@
 				8C4F99622A1E3B6100277C6A /* ReadFiles.swift in Sources */,
 				8CFFF29C2A52E5F000E1F49C /* Crossover.swift in Sources */,
 				8C4F99C32A1E3D4600277C6A /* Miscellaneous.swift in Sources */,
+				8C2084D52A58338F004A2DC5 /* LogFront.swift in Sources */,
 				8C4F99C82A1E4E7400277C6A /* Initialise.swift in Sources */,
 				8C4F99582A1E3B3B00277C6A /* main.swift in Sources */,
 				8C4F99C62A1E4A7F00277C6A /* GeneticAlgorithm.swift in Sources */,
