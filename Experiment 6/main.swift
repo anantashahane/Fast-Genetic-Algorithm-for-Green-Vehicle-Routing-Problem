@@ -7,7 +7,7 @@
 
 import Foundation
 
-let files = ReadFiles(benchmarkNameContains: "E")
+let files = ReadFiles(benchmarkNameContains: "M")
 let clock = ContinuousClock()
 for (index, file) in files.enumerated() {
     let benchmarkName = file.split(separator: "/").last!.split(separator: ".").first!

@@ -10,15 +10,9 @@ import Foundation
 extension GeneticAlgorithm {
     
     func MutatePopulation() {
-//        let hightestRank = parentPopulation.map({$0.frontNumber}).max() ?? 1
-//        var usageData = Array(repeating: 0, count: 5)
-//        let oldOffspringPopulation = parentPopulation
         offspringPopulation = []
         for individual in parentPopulation {
-//            let strictness = Double(hightestRank - individual.frontNumber) * 0.25
             let randomNumber = SpinRouletteWheel(strictness: 2, onCandidates: Array(1...5))
-//            let randomNumber = SpinRouletteWheel(strictness: strictness, onCandidates: Array(1...5))
-//            usageData[randomNumber! - 1] += 1
             switch randomNumber {
             case 1: offspringPopulation.append(TSPMutation(individual: individual))
             case 2: offspringPopulation.append(LNS(individual: individual))
