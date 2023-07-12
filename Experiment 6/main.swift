@@ -7,12 +7,12 @@
 
 import Foundation
 
-let files = ReadFiles(benchmarkNameContains: "M")
+let files = ReadFiles(benchmarkNameContains: "A-n32-k5")
 let clock = ContinuousClock()
 for (index, file) in files.enumerated() {
     let benchmarkName = file.split(separator: "/").last!.split(separator: ".").first!
     print("–––––––––––––––––––––––––(\(index + 1)/\(files.count)) \(benchmarkName)–––––––––––––––––––––––––")
-    let ge = GeneticAlgorithm(fileName: file, populationSize: 100)
+    let ge = GeneticAlgorithm(fileName: file, populationSize: 100, enableArrogance: true)
     var archive = [Routine]()
     let result = clock.measure {
         archive = ge.RunAlgorithm(iterationCount: 500)

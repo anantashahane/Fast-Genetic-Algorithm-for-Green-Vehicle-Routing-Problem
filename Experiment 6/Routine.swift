@@ -184,6 +184,7 @@ struct Truck {
     }
 }
 
+//MARK: - Truck
 struct Routine {
     var trucks : [Truck]
     var strictness : Double
@@ -191,9 +192,10 @@ struct Routine {
     var dominatedByNumber = 0                       //Count of individual that dominates this individual.
     var rank = 0
     var frontNumber = 0
+    
     init(trucks: [Truck]) {
         self.trucks = trucks
-        strictness = 1.0
+        strictness = 1
     }
     
     func GetID() -> String {
@@ -239,5 +241,16 @@ struct Routine {
             $0.element.GetRadius(with: CustomerSet[$0.offset]) > $1.element.GetRadius(with: CustomerSet[$1.offset])
         }).map({$0.element})
         return returnTrucks
+    }
+    
+    mutating func UpdateStrictness(globalStrictness: Double, usingArrogance : Bool, frontCount : Int) {
+        if !usingArrogance {
+            let strictness = globalStrictness * pow(2.71, Double.NormalRandom(mu: 0, sigma: 1))
+            self.strictness = strictness
+        } else {
+            let strictness = globalStrictness * pow(2.71, Double.NormalRandom(mu: 0, sigma: 2))
+            let arrogance = 1.0 / (1.0 + pow(2.71, Double(frontNumber - frontCount)))
+            self.strictness = (self.strictness * arrogance) + (strictness * (1 - arrogance))
+        }
     }
 }
