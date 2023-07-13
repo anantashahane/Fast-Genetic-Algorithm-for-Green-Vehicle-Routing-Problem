@@ -58,7 +58,7 @@ func PlotPath(for routine: Routine, of customers: [Customer], runNumber: Int, id
     plt.legend()
     plt.axis("equal")
     plt.savefig("\(benchmark)/Path (\(runNumber) \(id))")
-    plt.clf() 
+    plt.clf()
     plt.close("all")
 }
 

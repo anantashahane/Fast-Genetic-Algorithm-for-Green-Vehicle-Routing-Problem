@@ -22,6 +22,8 @@ class GeneticAlgorithm {
     var offspringPopulation = [Routine]()
     var paretoFronts = [[Routine]]()
     var archive = MultiObjectiveArchive(dimensions: [.Distance : .Minimisation, .Fuel : .Minimisation])
+    var convergenceDistanceVector = [Double]()
+    var convergenceFuelVector = [Double]()
     
     init(fileName: String, populationSize: Int) {
         self.populationSize = populationSize
@@ -40,7 +42,7 @@ class GeneticAlgorithm {
         Initialise()
         Evaluate(parent: true)
         for gen in 1...iterationCount {
-//            CrossoverPopulation()
+            CrossoverPopulation()
             MutatePopulation()
             Evaluate()
             Selection()
@@ -48,14 +50,18 @@ class GeneticAlgorithm {
 //            lastUpdate = success ? generation : lastUpdate
             let distance = archive.GetArchive().map({$0.GetFitness(for: .Distance)})
             let fuel = archive.GetArchive().map({$0.GetFitness(for: .Fuel)})
-            if (gen % 10 == 0) {
+            convergenceDistanceVector.append(parentPopulation.map({$0.GetFitness(for: .Distance)}).min()!)
+            convergenceFuelVector.append(parentPopulation.map({$0.GetFitness(for: .Fuel)}).min()!)
+            if (gen % 1 == 0) {
                 if let optimal = optimal {
-                    print("Generation \(gen) currBest/optimal: \(String(format: "%.2f", distance.min()! * 100 / Double(optimal)))% (\(optimal)): Distance [\(String(format: "%.2f", distance.min()!)), \(String(format: "%.2f", distance.max()!))], Fuel [\(String(format: "%.2f", fuel.min()!)), \(String(format: "%.2f", fuel.max()!))], fronts \(paretoFronts.count), archive size \(archive.GetArchive().count).")
+                    print("Generation \(gen) Convergence: \(String(format: "%.2f", (distance.min()! - Double(optimal)) * 100 / Double(optimal)))% (\(optimal)): Distance [\(String(format: "%.2f", distance.min()!)), \(String(format: "%.2f", distance.max()!))], Fuel [\(String(format: "%.2f", fuel.min()!)), \(String(format: "%.2f", fuel.max()!))], fronts \(paretoFronts.count), archive size \(archive.GetArchive().count).")
                 } else {
                     print("Generation \(gen) Archive Range: Distance [\(String(format: "%.2f", distance.min()!)), \(String(format: "%.2f", distance.max()!))], Fuel [\(String(format: "%.2f", fuel.min()!)), \(String(format: "%.2f", fuel.max()!))], fronts \(paretoFronts.count), archive size \(archive.GetArchive().count).")
                 }
             }
         }
+        convergenceDistanceVector.append(parentPopulation.map({$0.GetFitness(for: .Distance)}).min()!)
+        convergenceFuelVector.append(parentPopulation.map({$0.GetFitness(for: .Fuel)}).min()!)
         return archive.GetArchive().sorted(by: {$0.GetFitness(for: .Distance) < $1.GetFitness(for: .Distance)})
     }
     

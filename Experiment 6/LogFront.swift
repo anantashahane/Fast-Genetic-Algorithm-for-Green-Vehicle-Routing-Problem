@@ -19,6 +19,13 @@ struct EncodableRoutine : Encodable {
     let fuel : Double
 }
 
+struct Convergence : Encodable {
+    let benchmark : String
+    let optimalDistance : Int?
+    let distanceSequence : [Double]
+    let fuelSequence : [Double]
+}
+
 func EncodeParetoFront(benchmarkName : String, frontRoutines : [Routine], Optimality: Int?) -> Data? {
     var routines = [EncodableRoutine]()
     for individual in frontRoutines {
@@ -36,10 +43,44 @@ func EncodeParetoFront(benchmarkName : String, frontRoutines : [Routine], Optima
     return nil
 }
 
-func SaveFront(data: Data, benchmarkName : String) {
+func EncodeConvergence(benchmarkName: String, distanceVector : [Double], fuelVector : [Double], OptimalDistance: Int?) -> Data? {
+    let Convergence = Convergence(benchmark: benchmarkName, optimalDistance: OptimalDistance, distanceSequence: distanceVector, fuelSequence: fuelVector)
+    let encode = JSONEncoder()
+    if let data = try? encode.encode(Convergence.self) {
+        print("Encoded Convergence")
+        return data
+    } else {
+        print("Convergence Encoding failed.")
+        return nil
+    }
+    
+}
+
+func SaveBenchmarkData(benchmarkName : String, data: Data) {
     let fileManager = FileManager()
     let pwd = fileManager.currentDirectoryPath
     print("$pwd: \(pwd)")
-    let destinationPath = pwd.appending("/\(benchmarkName)/front.json")
-    fileManager.createFile(atPath: destinationPath, contents: data)
+    let destinationPath = pwd.appending("/\(benchmarkName)")
+    if fileManager.currentDirectoryPath.contains(benchmarkName) {
+        print("Found \(benchmarkName)")
+    } else {
+        try? fileManager.createDirectory(atPath: destinationPath, withIntermediateDirectories: false)
+        print("Generated directory \(destinationPath)")
+    }
+    let destinationFile = destinationPath.appending("/front.json")
+    fileManager.createFile(atPath: destinationFile, contents: data)
+}
+
+func SaveConvergence(benchmarkName : String, CongerenceData : Data) {
+    let fileManager = FileManager()
+    let pwd = fileManager.currentDirectoryPath
+    let convergenceDestinationPath = pwd.appending("/\(benchmarkName)")
+    if fileManager.currentDirectoryPath.contains(benchmarkName) {
+        print("Found \(benchmarkName)")
+    } else {
+        try? fileManager.createDirectory(atPath: convergenceDestinationPath, withIntermediateDirectories: false)
+        print("Generated directory \(convergenceDestinationPath)")
+    }
+    let destinationFile = convergenceDestinationPath.appending("/convergence.json")
+    fileManager.createFile(atPath: destinationFile, contents: CongerenceData)
 }
