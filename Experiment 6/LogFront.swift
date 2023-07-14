@@ -26,6 +26,18 @@ struct Convergence : Encodable {
     let fuelSequence : [Double]
 }
 
+struct EncodedBenchmark : Encodable {
+    let benchmark : String
+    let customers : [EncodedCustomer]
+}
+
+struct EncodedCustomer : Encodable {
+    let id : Int
+    let x : Double
+    let y : Double
+    let demand : Int
+}
+
 func EncodeParetoFront(benchmarkName : String, frontRoutines : [Routine], Optimality: Int?) -> Data? {
     var routines = [EncodableRoutine]()
     for individual in frontRoutines {
@@ -35,7 +47,7 @@ func EncodeParetoFront(benchmarkName : String, frontRoutines : [Routine], Optima
     let data = SaveData(benchmark: benchmarkName, Optimal: Optimality, front: routines)
     let jsonEncoder = JSONEncoder()
     if let jsonData = try? jsonEncoder.encode(data) {
-        print(jsonData)
+        print("Encoded Pareto Front")
         return jsonData
     } else {
         print("Failed to encode \(benchmarkName).")
@@ -53,10 +65,26 @@ func EncodeConvergence(benchmarkName: String, distanceVector : [Double], fuelVec
         print("Convergence Encoding failed.")
         return nil
     }
-    
 }
 
-func SaveBenchmarkData(benchmarkName : String, data: Data) {
+func ExportBenchmarktoJson(benchmark : String, Customers : [Customer]) -> Data? {
+    var encodedCustomers = [EncodedCustomer]()
+    for customer in Customers {
+        let encodedCustomer = EncodedCustomer(id: customer.id, x: customer.x, y: customer.y, demand: customer.demand)
+        encodedCustomers.append(encodedCustomer)
+    }
+    let EncodedBenchmark = EncodedBenchmark(benchmark: benchmark, customers: encodedCustomers)
+    let encoder = JSONEncoder()
+    if let data = try? encoder.encode(EncodedBenchmark.self) {
+        print("Exported \(benchmark)")
+        return data
+    } else {
+        print("Failed to export \(benchmark).")
+        return nil
+    }
+}
+
+func SaveDatatoFile(benchmarkName : String, data: Data, fileName : String) {
     let fileManager = FileManager()
     let pwd = fileManager.currentDirectoryPath
     print("$pwd: \(pwd)")
@@ -67,20 +95,6 @@ func SaveBenchmarkData(benchmarkName : String, data: Data) {
         try? fileManager.createDirectory(atPath: destinationPath, withIntermediateDirectories: false)
         print("Generated directory \(destinationPath)")
     }
-    let destinationFile = destinationPath.appending("/front.json")
+    let destinationFile = destinationPath.appending("/\(fileName).json")
     fileManager.createFile(atPath: destinationFile, contents: data)
-}
-
-func SaveConvergence(benchmarkName : String, CongerenceData : Data) {
-    let fileManager = FileManager()
-    let pwd = fileManager.currentDirectoryPath
-    let convergenceDestinationPath = pwd.appending("/\(benchmarkName)")
-    if fileManager.currentDirectoryPath.contains(benchmarkName) {
-        print("Found \(benchmarkName)")
-    } else {
-        try? fileManager.createDirectory(atPath: convergenceDestinationPath, withIntermediateDirectories: false)
-        print("Generated directory \(convergenceDestinationPath)")
-    }
-    let destinationFile = convergenceDestinationPath.appending("/convergence.json")
-    fileManager.createFile(atPath: destinationFile, contents: CongerenceData)
 }
