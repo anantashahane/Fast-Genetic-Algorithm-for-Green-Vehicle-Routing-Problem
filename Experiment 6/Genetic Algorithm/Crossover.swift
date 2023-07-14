@@ -18,7 +18,7 @@ extension GeneticAlgorithm {
         }
     }
     
-    func Crossover(parent1 : Routine, parent2 : Routine) -> Routine {
+    private func Crossover(parent1 : Routine, parent2 : Routine) -> Routine {
         var remainingCustomers = Array(Customers.keys)
         var addedCustomers = [Int]()
         let xPoint = Int.random(in: 1...numberOfTrucks / 2)
@@ -60,7 +60,10 @@ extension GeneticAlgorithm {
         addedCustomers = offspringTrucks.flatMap({$0.sequence})
         remainingCustomers = remainingCustomers.filter({!addedCustomers.contains($0)})
         if remainingCustomers.isEmpty {
-            return Routine(trucks: offspringTrucks)
+            var routine = Routine(trucks: offspringTrucks)
+            routine.strictness = (Double(xPoint) / Double(numberOfTrucks) * parent1.strictness) + (Double(numberOfTrucks - xPoint) / Double(numberOfTrucks) * parent2.strictness)
+            routine.strictnessDelta = (Double(xPoint) / Double(numberOfTrucks) * parent1.strictnessDelta) + (Double(numberOfTrucks - xPoint) / Double(numberOfTrucks) * parent2.strictnessDelta)
+            return routine
         } else {
             return [parent1, parent2].randomElement()!
         }

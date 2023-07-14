@@ -19,6 +19,8 @@ class GeneticAlgorithm {
     let optimal : Int?
     let enableArrogance : Bool
     //Variables
+    var convergenceDistanceVector = [Double]()
+    var convergenceFuelVector = [Double]()
     var parentPopulation = [Routine]()
     var offspringPopulation = [Routine]()
     var paretoFronts = [[Routine]]()
@@ -46,7 +48,9 @@ class GeneticAlgorithm {
         Initialise()
         Evaluate(parent: true)
         for gen in 1...iterationCount {
-//            CrossoverPopulation()
+            convergenceDistanceVector.append(parentPopulation.map({$0.GetFitness(for: .Distance)}).min()!)
+            convergenceFuelVector.append(parentPopulation.map({$0.GetFitness(for: .Fuel)}).min()!)
+            CrossoverPopulation()
             ShareStrictness(generation: gen)
             MutatePopulation()
             Evaluate()
@@ -57,23 +61,20 @@ class GeneticAlgorithm {
             let fuel = archive.GetArchive().map({$0.GetFitness(for: .Fuel)})
             if (gen % 1 == 0) {
                 if let optimal = optimal {
-                    print("Generation \(gen) currBest/optimal: \(String(format: "%.2f", distance.min()! * 100 / Double(optimal)))% (\(optimal)): Distance [\(String(format: "%.2f", distance.min()!)), \(String(format: "%.2f", distance.max()!))], Fuel [\(String(format: "%.2f", fuel.min()!)), \(String(format: "%.2f", fuel.max()!))], fronts \(paretoFronts.count), strictness: \(String(format: "%.2f", strictness)), archive size \(archive.GetArchive().count).")
+                    let strictness = parentPopulation.map({$0.strictness})
+                    print("Generation \(gen) Convergence: \(String(format: "%.2f", (distance.min()! - Double(optimal)) * 100 / Double(optimal)))% (\(optimal)): Distance [\(String(format: "%.2f", distance.min()!)), \(String(format: "%.2f", distance.max()!))], Fuel [\(String(format: "%.2f", fuel.min()!)), \(String(format: "%.2f", fuel.max()!))], fronts \(paretoFronts.count), strictness: \(String(format: "[%.2f, %.2f], %.2f", strictness.min()!, strictness.max()!, strictness.reduce(0, +) / Double(strictness.count))), archive size \(archive.GetArchive().count).")
                 } else {
                     print("Generation \(gen) Archive Range: Distance [\(String(format: "%.2f", distance.min()!)), \(String(format: "%.2f", distance.max()!))], Fuel [\(String(format: "%.2f", fuel.min()!)), \(String(format: "%.2f", fuel.max()!))], fronts \(paretoFronts.count), strictness: \(strictness), archive size \(archive.GetArchive().count).")
                 }
             }
         }
+        convergenceDistanceVector.append(parentPopulation.map({$0.GetFitness(for: .Distance)}).min()!)
+        convergenceFuelVector.append(parentPopulation.map({$0.GetFitness(for: .Fuel)}).min()!)
         return archive.GetArchive().sorted(by: {$0.GetFitness(for: .Distance) < $1.GetFitness(for: .Distance)})
     }
     
     func ShareStrictness(generation : Int) {
-        if let max = parentPopulation.map({$0.frontNumber}).max() {
-            maxFront = max + 1
-        }
         strictness = parentPopulation.map({$0.strictness}).reduce(0, +) / Double(parentPopulation.count)
-        if generation % 50 == 0 {
-            strictness = 1
-        }
     }
     
     func GetCustomers() -> [Customer] {

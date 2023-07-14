@@ -10,17 +10,23 @@ import Foundation
 extension GeneticAlgorithm {
     
     func MutatePopulation() {
-        offspringPopulation = []
-        for individual in parentPopulation {
+        var newoffspringPopulation = [Routine]()
+        for individual in offspringPopulation {
             let randomNumber = SpinRouletteWheel(strictness: 2, onCandidates: Array(1...5))
+            var returnedIndividual = individual
             switch randomNumber {
-            case 1: offspringPopulation.append(TSPMutation(individual: individual))
-            case 2: offspringPopulation.append(LNS(individual: individual))
-            case 3: offspringPopulation.append(CustomerExchangeMutation(individual: individual))
-            case 4: offspringPopulation.append(TruckCrossover(individual: individual))
-            default: offspringPopulation.append(CustomerTransferMutation(individual: individual))
+            case 1: returnedIndividual = TSPMutation(individual: individual)
+            case 2: returnedIndividual = LNS(individual: individual)
+            case 3: returnedIndividual = CustomerExchangeMutation(individual: individual)
+            case 4: returnedIndividual = TruckCrossover(individual: individual)
+            default: returnedIndividual = CustomerTransferMutation(individual: individual)
             }
+            if returnedIndividual.strictness < 0.01 || returnedIndividual.strictness > Double(Customers.count) {
+                returnedIndividual.strictness = Double(Customers.count) / 2
+            }
+            newoffspringPopulation.append(returnedIndividual)
         }
+        offspringPopulation = newoffspringPopulation
 //        print("\tUsage data: [2OptM, CTM, CEM, TX, LNS]: \(usageData).")
     }
     
@@ -93,7 +99,7 @@ extension GeneticAlgorithm {
         let candidateTrucks = individual.trucks.enumerated().filter({$0.element.GetDemand() > 0})
         if let transferTruck1 = SpinRouletteWheel(strictness: 0, onCandidates: candidateTrucks) {
             returnIndividual.UpdateStrictness(globalStrictness: strictness, usingArrogance: enableArrogance, frontCount: maxFront)
-            var strictness = returnIndividual.strictness
+            let strictness = returnIndividual.strictness
             let t1OutCandidates = transferTruck1.element.GetDistanceSequence(customers: Customers.values)
             let customerfromTruck1ID = SpinRouletteWheel(strictness: strictness, onCandidates: t1OutCandidates) ?? t1OutCandidates[0]
             let customerfromTruck1 = Customers[customerfromTruck1ID]!
@@ -122,7 +128,7 @@ extension GeneticAlgorithm {
     private func TruckCrossover(individual : Routine) -> Routine {
         var returnIndividual = individual
         returnIndividual.UpdateStrictness(globalStrictness: strictness, usingArrogance: enableArrogance, frontCount: maxFront)
-        var strictness = returnIndividual.strictness
+        let strictness = returnIndividual.strictness
         var remainingTrucks = Array(returnIndividual.trucks.enumerated())
         var truck1 = SpinRouletteWheel(strictness: 0, onCandidates: remainingTrucks)!
         remainingTrucks = remainingTrucks.filter({$0.offset != truck1.offset}).filter({$0.element.sequence.count > 1})
@@ -177,7 +183,7 @@ extension GeneticAlgorithm {
         var freeCustomerIDs = [Int]()
         var returnIndividual = individual
         returnIndividual.UpdateStrictness(globalStrictness: strictness, usingArrogance: enableArrogance, frontCount: maxFront)
-        var strictness = returnIndividual.strictness
+        let strictness = returnIndividual.strictness
         for (id, truck) in returnIndividual.trucks.enumerated() {
             let emitterCount = Int.random(in: 0...(5 * truck.sequence.count / 6))
             if emitterCount != 0 {

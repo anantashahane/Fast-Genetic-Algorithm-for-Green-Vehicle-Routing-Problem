@@ -7,26 +7,26 @@
 
 import Foundation
 
-let files = ReadFiles(benchmarkNameContains: "A-n32-k5")
+let files = ReadFiles(benchmarkNameContains: nil)
 let clock = ContinuousClock()
 for (index, file) in files.enumerated() {
-    let benchmarkName = file.split(separator: "/").last!.split(separator: ".").first!
+    let benchmarkName = String(file.split(separator: "/").last!.split(separator: ".").first!)
     print("–––––––––––––––––––––––––(\(index + 1)/\(files.count)) \(benchmarkName)–––––––––––––––––––––––––")
-    let ge = GeneticAlgorithm(fileName: file, populationSize: 100, enableArrogance: true)
+    let ge = GeneticAlgorithm(fileName: file, populationSize: 100, enableArrogance: false)
     var archive = [Routine]()
     let result = clock.measure {
         archive = ge.RunAlgorithm(iterationCount: 500)
     }
     print("Took \(result).")
     
-    
-    for (index, individual) in archive.enumerated() {
-        PlotPath(for: individual, of: ge.GetCustomers(), runNumber: 1, id: index + 1, benchmark: String(benchmarkName))
-    }
     if let data = EncodeParetoFront(benchmarkName: String(benchmarkName), frontRoutines: archive, Optimality: ge.optimal) {
-        SaveFront(data: data, benchmarkName: String(benchmarkName))
+        SaveDatatoFile(benchmarkName: benchmarkName, data: data, fileName: "front")
     }
-    PlotParetoFronts(for: ge.GetFronts(), run: -1, benchmark: String(benchmarkName))
-    PlotParetoFronts(for: [archive], run: 1, benchmark: String(benchmarkName))
+    if let data = EncodeConvergence(benchmarkName: String(benchmarkName), distanceVector: ge.convergenceDistanceVector, fuelVector: ge.convergenceFuelVector, OptimalDistance: ge.optimal) {
+        SaveDatatoFile(benchmarkName: benchmarkName, data: data, fileName: "convergence")
+    }
+    if let data = ExportBenchmarktoJson(benchmark: benchmarkName, Customers: ge.Customers.values + [ge.Depot]) {
+        SaveDatatoFile(benchmarkName: benchmarkName, data: data, fileName: benchmarkName)
+    }
 }
 

@@ -188,6 +188,7 @@ struct Truck {
 struct Routine {
     var trucks : [Truck]
     var strictness : Double
+    var strictnessDelta : Double
     var dominatesSetIndex = [Int]()                 //Set of individuals that this individual dominate.
     var dominatedByNumber = 0                       //Count of individual that dominates this individual.
     var rank = 0
@@ -195,6 +196,7 @@ struct Routine {
     
     init(trucks: [Truck]) {
         self.trucks = trucks
+        strictnessDelta = 0
         strictness = 1
     }
     
@@ -245,12 +247,14 @@ struct Routine {
     
     mutating func UpdateStrictness(globalStrictness: Double, usingArrogance : Bool, frontCount : Int) {
         if !usingArrogance {
-            let strictness = globalStrictness * pow(2.71, Double.NormalRandom(mu: 0, sigma: 1))
-            self.strictness = strictness
+            self.strictness = (self.strictness + globalStrictness) / 2
+            strictnessDelta += pow(2.71, Double.NormalRandom(mu: 0, sigma: 1))
+            self.strictness *= Double.NormalRandom(mu: strictnessDelta, sigma: 1)
         } else {
-            let strictness = globalStrictness * pow(2.71, Double.NormalRandom(mu: 0, sigma: 2))
             let arrogance = 1.0 / (1.0 + pow(2.71, Double(frontNumber - frontCount)))
-            self.strictness = (self.strictness * arrogance) + (strictness * (1 - arrogance))
+            self.strictness = (self.strictness * arrogance) + (globalStrictness * (1 - arrogance))
+            strictnessDelta += pow(2.71, Double.NormalRandom(mu: 0, sigma: 1))
+            self.strictness *= Double.NormalRandom(mu: strictnessDelta, sigma: 1)
         }
     }
 }
