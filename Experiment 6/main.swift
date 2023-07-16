@@ -12,7 +12,7 @@ let clock = ContinuousClock()
 for (index, file) in files.enumerated() {
     let benchmarkName = String(file.split(separator: "/").last!.split(separator: ".").first!)
     print("–––––––––––––––––––––––––(\(index + 1)/\(files.count)) \(benchmarkName)–––––––––––––––––––––––––")
-    let ge = GeneticAlgorithm(fileName: file, populationSize: 100, enableArrogance: false)
+    let ge = GeneticAlgorithm(fileName: file, populationSize: 100)
     var archive = [Routine]()
     let result = clock.measure {
         archive = ge.RunAlgorithm(iterationCount: 500)

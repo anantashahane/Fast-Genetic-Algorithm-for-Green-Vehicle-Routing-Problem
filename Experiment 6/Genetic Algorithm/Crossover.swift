@@ -61,8 +61,6 @@ extension GeneticAlgorithm {
         remainingCustomers = remainingCustomers.filter({!addedCustomers.contains($0)})
         if remainingCustomers.isEmpty {
             var routine = Routine(trucks: offspringTrucks)
-            routine.strictness = (Double(xPoint) / Double(numberOfTrucks) * parent1.strictness) + (Double(numberOfTrucks - xPoint) / Double(numberOfTrucks) * parent2.strictness)
-            routine.strictnessDelta = (Double(xPoint) / Double(numberOfTrucks) * parent1.strictnessDelta) + (Double(numberOfTrucks - xPoint) / Double(numberOfTrucks) * parent2.strictnessDelta)
             return routine
         } else {
             return [parent1, parent2].randomElement()!

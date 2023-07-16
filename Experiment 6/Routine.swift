@@ -245,16 +245,8 @@ struct Routine {
         return returnTrucks
     }
     
-    mutating func UpdateStrictness(globalStrictness: Double, usingArrogance : Bool, frontCount : Int) {
-        if !usingArrogance {
-            self.strictness = (self.strictness + globalStrictness) / 2
-            strictnessDelta += pow(2.71, Double.NormalRandom(mu: 0, sigma: 1))
-            self.strictness *= Double.NormalRandom(mu: strictnessDelta, sigma: 1)
-        } else {
-            let arrogance = 1.0 / (1.0 + pow(2.71, Double(frontNumber - frontCount)))
-            self.strictness = (self.strictness * arrogance) + (globalStrictness * (1 - arrogance))
-            strictnessDelta += pow(2.71, Double.NormalRandom(mu: 0, sigma: 1))
-            self.strictness *= Double.NormalRandom(mu: strictnessDelta, sigma: 1)
-        }
+    mutating func UpdateStrictness(globalStrictness : Double) {
+        strictnessDelta += Double.NormalRandom(mu: 0, sigma: 1)
+        self.strictness = globalStrictness * pow(2.71, strictnessDelta)
     }
 }
