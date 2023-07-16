@@ -7,7 +7,7 @@
 
 import Foundation
 
-let files = ReadFiles(benchmarkNameContains: nil)
+let files = ReadFiles(benchmarkNameContains: "F-n72")
 let clock = ContinuousClock()
 for (index, file) in files.enumerated() {
     let benchmarkName = String(file.split(separator: "/").last!.split(separator: ".").first!)
