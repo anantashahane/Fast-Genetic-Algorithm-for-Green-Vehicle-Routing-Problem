@@ -29,7 +29,7 @@ extension GeneticAlgorithm {
         //Does the Alpha * current distance 2-opt search, an modification of 2-opt mutator, to optimise for searching for more fuel-distance pareto-front.
         var returnIndividual = individual
         if Double.random(in: 0...1) < 0.1 {
-            if let mutationTruck = Array(returnIndividual.trucks.enumerated()).randomElement() {
+            if let mutationTruck = returnIndividual.trucks.enumerated().filter({!$0.element.sequence.isEmpty}).randomElement() {
                 let count = mutationTruck.element.sequence.count
                 let randomPoint = Int.random(in: 0..<count)
                 let sequence = Array(mutationTruck.element.sequence[randomPoint..<count] + mutationTruck.element.sequence[0..<randomPoint])
