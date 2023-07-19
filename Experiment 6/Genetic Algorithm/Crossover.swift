@@ -60,8 +60,7 @@ extension GeneticAlgorithm {
         addedCustomers = offspringTrucks.flatMap({$0.sequence})
         remainingCustomers = remainingCustomers.filter({!addedCustomers.contains($0)})
         if remainingCustomers.isEmpty {
-            var routine = Routine(trucks: offspringTrucks)
-            return routine
+            return Routine(trucks: offspringTrucks)
         } else {
             return [parent1, parent2].randomElement()!
         }

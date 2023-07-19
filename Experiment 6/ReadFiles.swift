@@ -7,7 +7,7 @@
 
 import Foundation
 
-func ReadFiles(benchmarkNameContains : String? = nil) -> [String] {
+func ReadFiles(benchmarkNameContains : String? = nil, afterName : String? = nil) -> [String] {
     let docsDir = NSHomeDirectory().appending("/Documents/Masters/Research Project/Experiment 6/Experiment 6/Benchmarks")
     let localFileManager = FileManager()
     var dataset = [String]()
@@ -25,8 +25,14 @@ func ReadFiles(benchmarkNameContains : String? = nil) -> [String] {
             }
         }
     }
+    dataset = dataset.sorted()
     if let benchmarkNameContains = benchmarkNameContains {
         return dataset.filter({$0.contains(benchmarkNameContains)}).sorted()
     }
-    return dataset.sorted()
+    if let afterName = afterName {
+        if let index = dataset.firstIndex(where: {$0.contains(afterName)}) {
+            dataset = Array(dataset[index..<dataset.count])
+        }
+    }
+    return dataset
 }

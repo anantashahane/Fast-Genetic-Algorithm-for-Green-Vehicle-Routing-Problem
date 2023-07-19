@@ -70,14 +70,8 @@ class GeneticAlgorithm {
     }
     
     func ShareStrictness() {
-        var strictness = 0.0
-        var sumOfFronts = 0
-        let maxFront = parentPopulation.map({$0.frontNumber}).max()!
-        for individual in parentPopulation {
-            strictness += (individual.strictness * Double(maxFront - individual.frontNumber))
-            sumOfFronts += individual.frontNumber
-        }
-        averageStrictness = strictness / Double(sumOfFronts)
+        let strictness = parentPopulation.map({$0.strictness}).reduce(0, +)
+        averageStrictness = strictness / Double(populationSize)
     }
     
     func GetCustomers() -> [Customer] {

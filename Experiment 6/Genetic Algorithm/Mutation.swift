@@ -10,7 +10,7 @@ import Foundation
 extension GeneticAlgorithm {
     
     func MutatePopulation() {
-        for (index, _) in offspringPopulation.enumerated() {
+        for (index, individual) in offspringPopulation.enumerated() {
             let randomNumber = SpinRouletteWheel(strictness: 2, onCandidates: Array(1...5))
             if randomNumber != 1 {
                 offspringPopulation[index].UpdateStrictness(globalStrictness: averageStrictness)
@@ -22,10 +22,10 @@ extension GeneticAlgorithm {
             case 4: offspringPopulation[index] = TruckCrossover(individual: offspringPopulation[index])
             default: offspringPopulation[index] = CustomerTransferMutation(individual: offspringPopulation[index])
             }
-//            if offspringPopulation[index].strictness < 0.01 || offspringPopulation[index].strictness > Double(Customers.count) {
-//                offspringPopulation[index].strictness = Double(Customers.count) / 2
-//                offspringPopulation[index].strictnessDelta = 0
-//            }
+            if offspringPopulation[index].strictness < 2.71 || offspringPopulation[index].strictness > pow(2.71, log2(Double(Customers.count))) {
+                offspringPopulation[index].strictness = 100 * Double(individual.frontNumber) / Double(paretoFronts.count + 1)
+                offspringPopulation[index].strictnessDelta = 0
+            }
         }
     }
     
@@ -33,7 +33,7 @@ extension GeneticAlgorithm {
         //Does the Alpha * current distance 2-opt search, an modification of 2-opt mutator, to optimise for searching for more fuel-distance pareto-front.
         var returnIndividual = individual
         if Double.random(in: 0...1) < 0.1 {
-            if let mutationTruck = Array(returnIndividual.trucks.enumerated()).randomElement() {
+            if let mutationTruck = returnIndividual.trucks.enumerated().filter({!$0.element.sequence.isEmpty}).randomElement() {
                 let count = mutationTruck.element.sequence.count
                 let randomPoint = Int.random(in: 0..<count)
                 let sequence = Array(mutationTruck.element.sequence[randomPoint..<count] + mutationTruck.element.sequence[0..<randomPoint])
