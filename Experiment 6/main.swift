@@ -7,7 +7,17 @@
 
 import Foundation
 
-let files = ReadFiles(benchmarkNameContains: "F-n72")
+var files = [String]()
+let commandLine = CommandLine.arguments
+if commandLine.count != 3 {
+    files = ReadFiles(benchmarkNameContains: "F-n72")
+} else {
+    switch commandLine[1] {
+    case "contains": files = ReadFiles(benchmarkNameContains: commandLine[2])
+    case "start": files = ReadFiles(startingFrom: commandLine[2])
+    default: print("Expected arguements start <benchmark name> or contains <benchmark name substring.>")
+    }
+}
 let clock = ContinuousClock()
 for (index, file) in files.enumerated() {
     let benchmarkName = String(file.split(separator: "/").last!.split(separator: ".").first!)

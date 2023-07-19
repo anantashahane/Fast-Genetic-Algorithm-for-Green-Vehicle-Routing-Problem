@@ -215,7 +215,7 @@ extension GeneticAlgorithm {
     }
 
     private func CalculateStrictness(routine : Routine) -> Double {
-        let strictness = Double(routine.frontNumber * 100) / Double(paretoFronts.count) * pow(2.71, Double.NormalRandom(mu: 0, sigma: 1))   
+        let strictness = Double(routine.frontNumber) / Double(paretoFronts.count) * pow(2.71, log(Double(Customers.count)))   
         return strictness
     }
 }
