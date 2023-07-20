@@ -22,7 +22,7 @@ extension GeneticAlgorithm {
             case 4: offspringPopulation[index] = TruckCrossover(individual: offspringPopulation[index])
             default: offspringPopulation[index] = CustomerTransferMutation(individual: offspringPopulation[index])
             }
-            if offspringPopulation[index].strictness < 2.71 || offspringPopulation[index].strictness > pow(2.71, log2(Double(Customers.count))) {
+            if offspringPopulation[index].strictness < 2.71 || offspringPopulation[index].strictness > Double(Customers.count) {
                 offspringPopulation[index].strictness = 100 * Double(individual.frontNumber) / Double(paretoFronts.count + 1)
                 offspringPopulation[index].strictnessDelta = 0
             }
