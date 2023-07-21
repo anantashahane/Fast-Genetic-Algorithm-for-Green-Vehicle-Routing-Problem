@@ -1,5 +1,5 @@
 NAME : M-n200-k16
-COMMENT : (From Christophides et al, No of trucks: 16)
+COMMENT : (From Christophides et al, No of trucks: 16, Best value: 1274)
 TYPE : CVRP
 DIMENSION : 200
 EDGE_WEIGHT_TYPE : EUC_2D
