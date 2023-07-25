@@ -18,7 +18,7 @@ extension GeneticAlgorithm {
             while !flag {
                 (flag, individual) = GetSeed(balanced: Bool.random())
             }
-            individual.strictness = Double.random(in: 0...Double(Customers.count))
+            individual.strictness = Double.random(in: 1...Double(Customers.count))
             parentPopulation.append(individual)
         }
     }

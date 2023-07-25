@@ -10,7 +10,7 @@ import Foundation
 let commandLineArguements = CommandLine.arguments
 var files = [String]()
 if commandLineArguements.count < 2 {
-    files = ReadFiles()
+    files = ReadFiles(benchmarkNameContains: nil)
 } else {
     switch commandLineArguements[1] {
     case "start":
