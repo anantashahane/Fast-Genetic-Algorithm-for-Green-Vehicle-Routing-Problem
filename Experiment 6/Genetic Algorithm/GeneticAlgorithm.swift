@@ -18,6 +18,7 @@ class GeneticAlgorithm {
     let populationSize : Int
     let optimal : Int?
     //Variables
+    var rouletteCache = [String : [Double]]()
     var parentPopulation = [Routine]()
     var offspringPopulation = [Routine]()
     var paretoFronts = [[Routine]]()

@@ -10,7 +10,7 @@ import Foundation
 var files = [String]()
 let commandLine = CommandLine.arguments
 if commandLine.count != 3 {
-    files = ReadFiles(benchmarkNameContains: "A-n32-k5")
+    files = ReadFiles(benchmarkNameContains: "A")
 } else {
     switch commandLine[1] {
     case "contains": files = ReadFiles(benchmarkNameContains: commandLine[2])

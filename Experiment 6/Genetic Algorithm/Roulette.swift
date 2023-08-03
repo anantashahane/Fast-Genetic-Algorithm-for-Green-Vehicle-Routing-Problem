@@ -14,6 +14,9 @@ extension GeneticAlgorithm {
         if length < 1 {
             return []
         }
+        if let roulette = rouletteCache["\(strictness), \(length)"] {
+            return roulette
+        }
         var probabilityDistribution = [Double]()
         let selectionPressure = 1/Double(length)
         var px : Double = 0
@@ -22,6 +25,7 @@ extension GeneticAlgorithm {
             probabilityDistribution.append(px)
         }
         probabilityDistribution = probabilityDistribution.map({$0/px})
+        rouletteCache["\(strictness), \(length)"] = probabilityDistribution
         return probabilityDistribution
     }
     
@@ -40,6 +44,7 @@ extension GeneticAlgorithm {
                 break
             }
         }
+        returnIndex = Int.random(in: 0...returnIndex)
         return onCandidates[returnIndex]
     }
 }
