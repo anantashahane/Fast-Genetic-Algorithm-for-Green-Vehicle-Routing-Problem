@@ -10,10 +10,10 @@ import Foundation
 extension GeneticAlgorithm {
     
     func MutatePopulation() {
-        for (index, individual) in offspringPopulation.enumerated() {
+        for (index, _) in offspringPopulation.enumerated() {
             let randomNumber = SpinRouletteWheel(strictness: 2, onCandidates: Array(1...5))
             if randomNumber != 1 {
-                offspringPopulation[index].UpdateStrictness(globalStrictness: averageStrictness)
+                offspringPopulation[index].UpdateStrictness(globalStrictness: averageStrictness, learningRate: learningRate)
             }
             switch randomNumber {
             case 1: offspringPopulation[index] = TSPMutation(individual: offspringPopulation[index])
@@ -23,7 +23,7 @@ extension GeneticAlgorithm {
             default: offspringPopulation[index] = CustomerTransferMutation(individual: offspringPopulation[index])
             }
             if offspringPopulation[index].strictness < 2.71 || offspringPopulation[index].strictness > Double(Customers.count) {
-                offspringPopulation[index].strictness = 100 * Double(individual.frontNumber) / Double(paretoFronts.count + 1)
+                offspringPopulation[index].strictness = Double(Customers.count/2)// * Double(individual.frontNumber) / Double(paretoFronts.count + 1)
                 offspringPopulation[index].strictnessDelta = 0
             }
         }
@@ -131,7 +131,7 @@ extension GeneticAlgorithm {
         remainingTrucks = remainingTrucks.sorted(by: {
             GetDotProduct(projector: $0.element, projectee: truck1.element, fromCustomer: Depot, maxDistance: maxDistance) > GetDotProduct(projector: $1.element, projectee: truck1.element, fromCustomer: Depot, maxDistance: maxDistance)
         })
-        var truck2 = SpinRouletteWheel(strictness: strictness, onCandidates: remainingTrucks)!
+        var truck2 = SpinRouletteWheel(strictness: truck1.element.sequence.isEmpty ? 0 : strictness, onCandidates: remainingTrucks)!
         
         if truck1.element.sequence.isEmpty {
             let splitPoint = Int.random(in: 1..<truck2.element.sequence.count)

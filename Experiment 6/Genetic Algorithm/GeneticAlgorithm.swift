@@ -17,6 +17,7 @@ class GeneticAlgorithm {
     let distanceMatrix : [[Double]]
     let populationSize : Int
     let optimal : Int?
+    let learningRate : Double
     //Variables
     var averageStrictness : Double
     var convergenceDistanceVector = [Double]()
@@ -27,8 +28,9 @@ class GeneticAlgorithm {
     var archive = MultiObjectiveArchive(dimensions: [.Distance : .Minimisation, .Fuel : .Minimisation])
     var maxFront = 1
     
-    init(fileName: String, populationSize: Int) {
+    init(fileName: String, populationSize: Int, learningRate : Double) {
         self.populationSize = populationSize
+        self.learningRate = learningRate
         
         let (numberofTrucks, customers, capacity, opt) = Readfile(filePath: fileName)
         optimal = opt
@@ -58,7 +60,7 @@ class GeneticAlgorithm {
             if (gen % 1 == 0 || gen == 1) {
                 if let optimal = optimal {
                     let strictness = parentPopulation.map({$0.strictness})
-                    print("Generation \(gen) Convergence: \(String(format: "%.2f", (distance.min()! - Double(optimal)) * 100 / Double(optimal)))% (\(optimal)): Distance [\(String(format: "%.2f", distance.min()!)), \(String(format: "%.2f", distance.max()!))], Fuel [\(String(format: "%.2f", fuel.min()!)), \(String(format: "%.2f", fuel.max()!))], fronts \(paretoFronts.count), strictness: \(String(format: "[%.2f, %.2f], %.2f", strictness.min()!, strictness.max()!, averageStrictness)), archive size \(archive.GetArchive().count).")
+                    print("Generation \(gen) Convergence: \(String(format: "%.2f", (distance.min()! - Double(optimal)) * 100 / Double(optimal)))% (\(optimal)): Distance [\(String(format: "%.2f", distance.min()!)), \(String(format: "%.2f", distance.max()!))], Fuel [\(String(format: "%.2f", fuel.min()!)), \(String(format: "%.2f", fuel.max()!))], strictness: \(String(format: "[%.2f, %.2f], %.2f", strictness.min()!, strictness.max()!, averageStrictness)), archive size \(archive.GetArchive().count).")
                 } else {
                     print("Generation \(gen) Archive Range: Distance [\(String(format: "%.2f", distance.min()!)), \(String(format: "%.2f", distance.max()!))], Fuel [\(String(format: "%.2f", fuel.min()!)), \(String(format: "%.2f", fuel.max()!))], fronts \(paretoFronts.count), archive size \(archive.GetArchive().count).")
                 }
@@ -71,7 +73,7 @@ class GeneticAlgorithm {
     
     func ShareStrictness() {
         let strictness = parentPopulation.map({$0.strictness}).reduce(0, +)
-        averageStrictness = strictness / Double(populationSize)
+        averageStrictness = strictness / Double(parentPopulation.count)
     }
     
     func GetCustomers() -> [Customer] {

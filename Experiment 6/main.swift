@@ -10,7 +10,7 @@ import Foundation
 let commandLineArguements = CommandLine.arguments
 var files = [String]()
 if commandLineArguements.count < 2 {
-    files = ReadFiles(benchmarkNameContains: nil)
+    files = ReadFiles(afterName: "E-n101-k8")
 } else {
     switch commandLineArguements[1] {
     case "start":
@@ -27,7 +27,7 @@ let clock = ContinuousClock()
 for (index, file) in files.enumerated() {
     let benchmarkName = String(file.split(separator: "/").last!.split(separator: ".").first!)
     print("–––––––––––––––––––––––––(\(index + 1)/\(files.count)) \(benchmarkName)–––––––––––––––––––––––––")
-    let ge = GeneticAlgorithm(fileName: file, populationSize: 100)
+    let ge = GeneticAlgorithm(fileName: file, populationSize: 100, learningRate: 2)
     var archive = [Routine]()
     let result = clock.measure {
         archive = ge.RunAlgorithm(iterationCount: 500)

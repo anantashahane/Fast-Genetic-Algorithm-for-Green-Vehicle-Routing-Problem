@@ -245,8 +245,8 @@ struct Routine {
         return returnTrucks
     }
     
-    mutating func UpdateStrictness(globalStrictness : Double) {
-        strictnessDelta += Double.NormalRandom(mu: 0, sigma: 1)
+    mutating func UpdateStrictness(globalStrictness : Double, learningRate: Double) {
+        strictnessDelta += Double.NormalRandom(mu: 0, sigma: learningRate)
         self.strictness = globalStrictness * pow(2.71, strictnessDelta)
     }
 }
