@@ -50,10 +50,8 @@ extension GeneticAlgorithm {
         addedCustomers = offspringTrucks.flatMap({$0.sequence})
         remainingCustomers = remainingCustomers.filter({!addedCustomers.contains($0)})
         for customer in remainingCustomers {
-            let candidateTrucks = offspringTrucks.enumerated().sorted(by: {
-                GetDotProduct(truck: $0.element, toCustomer: Customers[customer]!, fromCustomer: Depot, maxDistance: maxDistance) > GetDotProduct(truck: $1.element, toCustomer: Customers[customer]!, fromCustomer: Depot, maxDistance: maxDistance)
-            }).filter({$0.element.CanAccept(customer: Customers[customer]!, capacity: vehicleCapacity)})
-            if let toTruck = SpinRouletteWheel(strictness: 100, onCandidates: candidateTrucks) {
+            let candidateTrucks = offspringTrucks.enumerated().filter({$0.element.CanAccept(customer: Customers[customer]!, capacity: vehicleCapacity)})
+            if let toTruck = candidateTrucks.randomElement() {
                 offspringTrucks[toTruck.offset].AddCustomer(customer: Customers[customer]!, allCustomers: Customers.values)
             }
         }

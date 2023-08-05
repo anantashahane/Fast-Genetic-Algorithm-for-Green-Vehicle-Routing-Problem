@@ -45,8 +45,7 @@ extension GeneticAlgorithm {
                 let randomCustomerIndex = sequence.enumerated().filter({$0.element == randomCustomer}).first!.offset
                 let distanceToBeat = distanceMatrix[randomCustomer][sequence[randomCustomerIndex + 1]] * alpha
                 let candidateCustomers = sequence.enumerated().filter({distanceMatrix[randomCustomer][$0.element] < distanceToBeat}).sorted(by: {distanceMatrix[randomCustomer][$0.element] < distanceMatrix[randomCustomer][$1.element]})
-                let strictness = CalculateStrictness(routine: individual)
-                if let mutationPoint = SpinRouletteWheel(strictness: strictness, onCandidates: candidateCustomers) {
+                if let mutationPoint = candidateCustomers.randomElement() {
                     sequence = Array(sequence[0..<min(randomCustomerIndex, mutationPoint.offset) + 1] + sequence[min(randomCustomerIndex, mutationPoint.offset) + 1..<max(randomCustomerIndex, mutationPoint.offset) + 1].reversed() + sequence[max(randomCustomerIndex, mutationPoint.offset) + 1..<sequence.count])
                     returnIndividual.trucks[mutationTruck.offset].sequence = sequence
                 } else {
@@ -63,21 +62,15 @@ extension GeneticAlgorithm {
     private func CustomerTransferMutation(individual : Routine) -> Routine {
         // Transfers the customers from heaviest truck to the truck that can easily take care of that customer.
         var returnIndividual = individual
-        var strictness = 0.0
         let rouletteTruck = individual.trucks.enumerated().filter({!$0.element.sequence.isEmpty})
-        if let emitterTruck = SpinRouletteWheel(strictness: strictness, onCandidates: rouletteTruck) {
+        if let emitterTruck = rouletteTruck.randomElement() {
             let transferCustomerCandidates = emitterTruck.element.GetDistanceSequence(customers: Customers.values)
-            strictness = CalculateStrictness(routine: individual)
-            let transferCustomerID = SpinRouletteWheel(strictness: strictness, onCandidates: transferCustomerCandidates) ?? transferCustomerCandidates[0]
+            let transferCustomerID = transferCustomerCandidates.randomElement()!
             let transferCustomer = Customers[transferCustomerID]!
-            let truckCandidates = individual.trucks.enumerated().filter({$0.element.GetID() != emitterTruck.element.GetID() && $0.element.CanAccept(customer: transferCustomer, capacity: vehicleCapacity)}).sorted(by: {
-                GetDotProduct(truck: $0.element, toCustomer: transferCustomer, fromCustomer: Depot, maxDistance: maxDistance) > GetDotProduct(truck: $1.element, toCustomer: transferCustomer, fromCustomer: Depot, maxDistance: maxDistance)
-            })
-            if let acceptingTruck = SpinRouletteWheel(strictness: strictness, onCandidates: truckCandidates) {
+            let truckCandidates = individual.trucks.enumerated().filter({$0.element.GetID() != emitterTruck.element.GetID() && $0.element.CanAccept(customer: transferCustomer, capacity: vehicleCapacity)})
+            if let acceptingTruck = truckCandidates.randomElement() {
                 _ = returnIndividual.trucks[emitterTruck.offset].RemoveCustomer(customer: transferCustomer, allCustomers: Customers.values)
-                let customers = acceptingTruck.element.sequence.enumerated().sorted(by: {
-                    GetDotProduct(shadow: Customers[$0.element]!, onCustomer: transferCustomer, fromCustomer: Depot, maxDistance: maxDistance) > GetDotProduct(shadow: Customers[$1.element]!, onCustomer: transferCustomer, fromCustomer: Depot, maxDistance: maxDistance)
-                })
+                let customers = Array(acceptingTruck.element.sequence.enumerated())
                 if customers.isEmpty {
                     returnIndividual.trucks[acceptingTruck.offset].AddCustomer(customer: transferCustomer, allCustomers: Customers.values)
                 } else {
@@ -92,10 +85,9 @@ extension GeneticAlgorithm {
         //Selects two customers from different truck, with minimal exchange cost, and exchanges their assigned truck.
         var returnIndividual = individual
         let candidateTrucks = individual.trucks.enumerated().filter({$0.element.GetDemand() > 0})
-        if let transferTruck1 = SpinRouletteWheel(strictness: 0, onCandidates: candidateTrucks) {
-            let strictness = CalculateStrictness(routine: individual)
+        if let transferTruck1 = candidateTrucks.randomElement() {
             let t1OutCandidates = transferTruck1.element.GetDistanceSequence(customers: Customers.values)
-            let customerfromTruck1ID = SpinRouletteWheel(strictness: strictness, onCandidates: t1OutCandidates) ?? t1OutCandidates[0]
+            let customerfromTruck1ID = t1OutCandidates.randomElement()!
             let customerfromTruck1 = Customers[customerfromTruck1ID]!
             var truckCustomerIDTuple = [(Int, Int)]()
             for truck in individual.trucks.enumerated() where truck.element.GetID() != transferTruck1.element.GetID() {
@@ -106,9 +98,7 @@ extension GeneticAlgorithm {
                     }
                 }
             }
-            truckCustomerIDTuple = truckCustomerIDTuple.sorted(by: {
-                GetDotProduct(shadow: Customers[$0.1]!, onCustomer: customerfromTruck1, fromCustomer: Depot, maxDistance: maxDistance) > GetDotProduct(shadow: Customers[$1.1]!, onCustomer: customerfromTruck1, fromCustomer: Depot, maxDistance: maxDistance)})
-            if let luckyTruckCustomerID = SpinRouletteWheel(strictness: strictness, onCandidates: truckCustomerIDTuple) {
+            if let luckyTruckCustomerID = truckCustomerIDTuple.randomElement() {
                 let customerfromTruck2 = Customers[luckyTruckCustomerID.1]!
                 let t1Index = returnIndividual.trucks[transferTruck1.offset].RemoveCustomer(customer: customerfromTruck1, allCustomers: Customers.values)
                 let t2Index = returnIndividual.trucks[luckyTruckCustomerID.0].RemoveCustomer(customer: customerfromTruck2, allCustomers: Customers.values)
@@ -122,13 +112,9 @@ extension GeneticAlgorithm {
     private func TruckCrossover(individual : Routine) -> Routine {
         var returnIndividual = individual
         var remainingTrucks = Array(returnIndividual.trucks.enumerated())
-        var truck1 = SpinRouletteWheel(strictness: 0, onCandidates: remainingTrucks)!
+        var truck1 = remainingTrucks.randomElement()!
         remainingTrucks = remainingTrucks.filter({$0.offset != truck1.offset}).filter({$0.element.sequence.count > 1})
-        remainingTrucks = remainingTrucks.sorted(by: {
-            GetDotProduct(projector: $0.element, projectee: truck1.element, fromCustomer: Depot, maxDistance: maxDistance) > GetDotProduct(projector: $1.element, projectee: truck1.element, fromCustomer: Depot, maxDistance: maxDistance)
-        })
-        let strictness = CalculateStrictness(routine: individual)
-        var truck2 = SpinRouletteWheel(strictness: strictness, onCandidates: remainingTrucks)!
+        var truck2 = remainingTrucks.randomElement()!
         
         if truck1.element.sequence.isEmpty {
             let splitPoint = Int.random(in: 1..<truck2.element.sequence.count)
@@ -175,14 +161,12 @@ extension GeneticAlgorithm {
     private func LNS(individual : Routine) -> Routine {
         var freeCustomerIDs = [Int]()
         var returnIndividual = individual
-        let strictness1 = CalculateStrictness(routine: individual)
-        let strictness0 = sqrt(strictness1)
         for (id, truck) in returnIndividual.trucks.enumerated() {
             let emitterCount = Int.random(in: 0...(5 * truck.sequence.count / 6))
             if emitterCount != 0 {
-                var customers = truck.GetDistanceSequence(customers: Customers.values)
+                var customers = truck.sequence
                 for _ in 1...emitterCount {
-                    if let emittedCustomer = SpinRouletteWheel(strictness: strictness0, onCandidates: customers) {
+                    if let emittedCustomer = customers.randomElement() {
                         freeCustomerIDs.append(emittedCustomer)
                         customers = customers.filter({$0 != emittedCustomer})
                         _ = returnIndividual.trucks[id].RemoveCustomer(customer: Customers[emittedCustomer]!, allCustomers: Customers.values)
@@ -192,14 +176,10 @@ extension GeneticAlgorithm {
         }
         let freeCustomers = freeCustomerIDs.map({Customers[$0]!})
         for customer in freeCustomers {
-            let candidateTrucks = returnIndividual.trucks.enumerated().filter({$0.element.CanAccept(customer: customer, capacity: vehicleCapacity)}).sorted(by:{
-                GetDotProduct(truck: $0.element, toCustomer: customer, fromCustomer: Depot, maxDistance: maxDistance) > GetDotProduct(truck: $1.element, toCustomer: customer, fromCustomer: Depot, maxDistance: maxDistance)
-            })
-            if let truck = SpinRouletteWheel(strictness: strictness1, onCandidates: candidateTrucks) {
+            let candidateTrucks = returnIndividual.trucks.enumerated().filter({$0.element.CanAccept(customer: customer, capacity: vehicleCapacity)})
+            if let truck = candidateTrucks.randomElement() {
                 let targetCustomerIDs = truck.element.sequence.enumerated()
-                let customers = targetCustomerIDs.map({($0.offset, Customers[$0.element]!)}).sorted(by: {
-                    GetDotProduct(shadow: $0.1, onCustomer: customer, fromCustomer: Depot, maxDistance: maxDistance) > GetDotProduct(shadow: $1.1, onCustomer: customer, fromCustomer: Depot, maxDistance: maxDistance)
-                })
+                let customers = targetCustomerIDs.map({($0.offset, Customers[$0.element]!)})
                 if customers.isEmpty {
                     returnIndividual.trucks[truck.offset].AddCustomer(customer: customer, allCustomers: Customers.values)
                 } else {
@@ -212,11 +192,6 @@ extension GeneticAlgorithm {
             return individual
         }
         return returnIndividual
-    }
-
-    private func CalculateStrictness(routine : Routine) -> Double {
-        let strictness = Double(routine.frontNumber) * Double(Customers.count) / Double(paretoFronts.count)
-        return strictness
     }
 }
 

@@ -44,29 +44,29 @@ func GetDotProduct(shadow ofCustomer: Customer, onCustomer : Customer, fromCusto
     returnValue *= (projecteeVector.0 * projectorVector.0 + projecteeVector.1 * projectorVector.1)
     return returnValue
 }
-
-func GetDotProduct(truck : Truck, toCustomer: Customer, fromCustomer: Customer, maxDistance : Double) -> Double {
-    //Returns (Dmax/D) * (v1 . v2) / v1 with truck projection on a customer.
-    let distance = GetDistance(customer1: toCustomer, customer2: fromCustomer)
-    let normalisedVector = ((toCustomer.x - fromCustomer.x) / distance, (toCustomer.y - toCustomer.y) / distance)
-    let truckCom = truck.GetCentreOfMass()
-    let truckVector = (truckCom.0 - fromCustomer.x, truckCom.1 - toCustomer.y)
-    var returnValue = maxDistance / GetDistance(x: truckCom, y: (toCustomer.x, toCustomer.y))
-    returnValue *= (normalisedVector.0 * truckVector.0 + normalisedVector.1 * truckVector.1)
-    return returnValue
-}
-
-func GetDotProduct(projector : Truck, projectee: Truck, fromCustomer: Customer, maxDistance : Double) -> Double {
-    //Returns (Dmax/D) * (v1 . v2) / v1 with truck projection on a customer.
-    let projectorCom = projector.GetCentreOfMass()
-    let projecteeCom = projectee.GetCentreOfMass()
-    let distance = GetDistance(x: projectorCom, y: projecteeCom)
-    let normalisedVector = ((projecteeCom.0 - fromCustomer.x) / distance, (projectorCom.1 - fromCustomer.y) / distance)
-    let truckVector = (projectorCom.0 - fromCustomer.x, projectorCom.1 - fromCustomer.y)
-    var returnValue = maxDistance / distance
-    returnValue *= (normalisedVector.0 * truckVector.0 + normalisedVector.1 * truckVector.1)
-    return returnValue
-}
+//
+//func GetDotProduct(truck : Truck, toCustomer: Customer, fromCustomer: Customer, maxDistance : Double) -> Double {
+//    //Returns (Dmax/D) * (v1 . v2) / v1 with truck projection on a customer.
+//    let distance = GetDistance(customer1: toCustomer, customer2: fromCustomer)
+//    let normalisedVector = ((toCustomer.x - fromCustomer.x) / distance, (toCustomer.y - toCustomer.y) / distance)
+//    let truckCom = truck.GetCentreOfMass()
+//    let truckVector = (truckCom.0 - fromCustomer.x, truckCom.1 - toCustomer.y)
+//    var returnValue = maxDistance / GetDistance(x: truckCom, y: (toCustomer.x, toCustomer.y))
+//    returnValue *= (normalisedVector.0 * truckVector.0 + normalisedVector.1 * truckVector.1)
+//    return returnValue
+//}
+//
+//func GetDotProduct(projector : Truck, projectee: Truck, fromCustomer: Customer, maxDistance : Double) -> Double {
+//    //Returns (Dmax/D) * (v1 . v2) / v1 with truck projection on a customer.
+//    let projectorCom = projector.GetCentreOfMass()
+//    let projecteeCom = projectee.GetCentreOfMass()
+//    let distance = GetDistance(x: projectorCom, y: projecteeCom)
+//    let normalisedVector = ((projecteeCom.0 - fromCustomer.x) / distance, (projectorCom.1 - fromCustomer.y) / distance)
+//    let truckVector = (projectorCom.0 - fromCustomer.x, projectorCom.1 - fromCustomer.y)
+//    var returnValue = maxDistance / distance
+//    returnValue *= (normalisedVector.0 * truckVector.0 + normalisedVector.1 * truckVector.1)
+//    return returnValue
+//}
 
 extension Double {
     static func NormalRandom(mu: Double, sigma: Double) -> Double {
