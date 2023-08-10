@@ -194,10 +194,10 @@ struct Routine {
     var rank = 0
     var frontNumber = 0
     
-    init(trucks: [Truck]) {
+    init(trucks: [Truck], averageStrictness: Double) {
         self.trucks = trucks
         strictnessDelta = 0
-        strictness = 1
+        strictness = averageStrictness
     }
     
     func GetID() -> String {

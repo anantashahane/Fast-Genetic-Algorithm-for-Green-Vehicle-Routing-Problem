@@ -14,7 +14,7 @@ extension GeneticAlgorithm {
         for _ in 1...populationSize {
 //            if i % 10 == 0 {print("Generating individual \(i)")}
             var flag = false
-            var individual = Routine(trucks: [])
+            var individual = Routine(trucks: [], averageStrictness: Double(Customers.count / 2))
             while !flag {
                 (flag, individual) = GetSeed(balanced: Bool.random())
             }
@@ -55,6 +55,6 @@ extension GeneticAlgorithm {
             }
             trucks.append(truck)
         }
-        return (remainingCustomers.isEmpty, Routine(trucks: trucks))
+        return (remainingCustomers.isEmpty, Routine(trucks: trucks, averageStrictness: Double(Customers.count / 2)))
     }
 }

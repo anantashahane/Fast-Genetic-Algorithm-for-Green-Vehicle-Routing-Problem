@@ -25,6 +25,7 @@ class GeneticAlgorithm {
     var parentPopulation = [Routine]()
     var offspringPopulation = [Routine]()
     var paretoFronts = [[Routine]]()
+    var strictnessProgression = [Double]()
     var archive = MultiObjectiveArchive(dimensions: [.Distance : .Minimisation, .Fuel : .Minimisation])
     var maxFront = 1
     
@@ -74,6 +75,7 @@ class GeneticAlgorithm {
     func ShareStrictness() {
         let strictness = parentPopulation.map({$0.strictness}).reduce(0, +)
         averageStrictness = strictness / Double(parentPopulation.count)
+        strictnessProgression.append(averageStrictness)
     }
     
     func GetCustomers() -> [Customer] {

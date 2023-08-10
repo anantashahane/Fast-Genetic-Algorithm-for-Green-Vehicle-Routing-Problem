@@ -16,8 +16,6 @@
 		8C4F99C62A1E4A7F00277C6A /* GeneticAlgorithm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C4F99C52A1E4A7F00277C6A /* GeneticAlgorithm.swift */; };
 		8C4F99C82A1E4E7400277C6A /* Initialise.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C4F99C72A1E4E7400277C6A /* Initialise.swift */; };
 		8C4F99CA2A1E4EB100277C6A /* Routine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C4F99C92A1E4EB100277C6A /* Routine.swift */; };
-		8C4F99CC2A1E53ED00277C6A /* PlotGraphs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C4F99CB2A1E53ED00277C6A /* PlotGraphs.swift */; };
-		8C4F99CF2A1E540E00277C6A /* PythonKit in Frameworks */ = {isa = PBXBuildFile; productRef = 8C4F99CE2A1E540E00277C6A /* PythonKit */; };
 		8C7741EA2A279ACE003AC37F /* Evaluate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C7741E92A279ACE003AC37F /* Evaluate.swift */; };
 		8C806DC62A2A1BCE00D8B376 /* Roulette.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C806DC52A2A1BCE00D8B376 /* Roulette.swift */; };
 		8CA718622A2DF19D0055279F /* Mutation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA718612A2DF19D0055279F /* Mutation.swift */; };
@@ -141,10 +139,10 @@
 		8C4F99C52A1E4A7F00277C6A /* GeneticAlgorithm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneticAlgorithm.swift; sourceTree = "<group>"; };
 		8C4F99C72A1E4E7400277C6A /* Initialise.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Initialise.swift; sourceTree = "<group>"; };
 		8C4F99C92A1E4EB100277C6A /* Routine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Routine.swift; sourceTree = "<group>"; };
-		8C4F99CB2A1E53ED00277C6A /* PlotGraphs.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlotGraphs.swift; sourceTree = "<group>"; };
 		8C4F99D02A1E54C200277C6A /* Experiment 6.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Experiment 6.entitlements"; sourceTree = "<group>"; };
 		8C7741E92A279ACE003AC37F /* Evaluate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Evaluate.swift; sourceTree = "<group>"; };
 		8C806DC52A2A1BCE00D8B376 /* Roulette.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Roulette.swift; sourceTree = "<group>"; };
+		8C9717322A84CC7C00EC1FAD /* make.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = make.sh; sourceTree = "<group>"; };
 		8CA718612A2DF19D0055279F /* Mutation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mutation.swift; sourceTree = "<group>"; };
 		8CAD3F8A2A31F7DC00B55710 /* MultiObjectiveArchive.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MultiObjectiveArchive.swift; sourceTree = "<group>"; };
 		8CB6F30E2A309F9700E08C8A /* Selection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Selection.swift; sourceTree = "<group>"; };
@@ -156,7 +154,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8C4F99CF2A1E540E00277C6A /* PythonKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -166,6 +163,7 @@
 		8C4F994B2A1E3B3B00277C6A = {
 			isa = PBXGroup;
 			children = (
+				8C9717322A84CC7C00EC1FAD /* make.sh */,
 				8C4F99C22A1E3D4600277C6A /* Miscellaneous.swift */,
 				8C4F99562A1E3B3B00277C6A /* Experiment 6 */,
 				8C4F99552A1E3B3B00277C6A /* Products */,
@@ -184,7 +182,6 @@
 			isa = PBXGroup;
 			children = (
 				8C4F99D02A1E54C200277C6A /* Experiment 6.entitlements */,
-				8C4F99CB2A1E53ED00277C6A /* PlotGraphs.swift */,
 				8C4F99C92A1E4EB100277C6A /* Routine.swift */,
 				8C4F99642A1E3B8F00277C6A /* Benchmarks */,
 				8C4F99C42A1E4A3000277C6A /* Genetic Algorithm */,
@@ -328,7 +325,6 @@
 			);
 			name = "Experiment 6";
 			packageProductDependencies = (
-				8C4F99CE2A1E540E00277C6A /* PythonKit */,
 			);
 			productName = "Experiment 6";
 			productReference = 8C4F99542A1E3B3B00277C6A /* Experiment 6 */;
@@ -384,7 +380,6 @@
 				8C4F99582A1E3B3B00277C6A /* main.swift in Sources */,
 				8C4F99C62A1E4A7F00277C6A /* GeneticAlgorithm.swift in Sources */,
 				8CAD3F8B2A31F7DC00B55710 /* MultiObjectiveArchive.swift in Sources */,
-				8C4F99CC2A1E53ED00277C6A /* PlotGraphs.swift in Sources */,
 				8C806DC62A2A1BCE00D8B376 /* Roulette.swift in Sources */,
 				8C4F99612A1E3B6100277C6A /* Readfile.swift in Sources */,
 				8C4F99CA2A1E4EB100277C6A /* Routine.swift in Sources */,
@@ -567,14 +562,6 @@
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
-
-/* Begin XCSwiftPackageProductDependency section */
-		8C4F99CE2A1E540E00277C6A /* PythonKit */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 8C4F99CD2A1E540E00277C6A /* XCRemoteSwiftPackageReference "PythonKit" */;
-			productName = PythonKit;
-		};
-/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 8C4F994C2A1E3B3B00277C6A /* Project object */;
 }

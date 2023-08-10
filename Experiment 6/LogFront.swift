@@ -38,6 +38,11 @@ struct EncodedCustomer : Encodable {
     let demand : Int
 }
 
+struct StrictnessProgression : Encodable {
+    let benchmark : String
+    let averageStrictness : [Double]
+}
+
 func EncodeParetoFront(benchmarkName : String, frontRoutines : [Routine], Optimality: Int?) -> Data? {
     var routines = [EncodableRoutine]()
     for individual in frontRoutines {
@@ -83,6 +88,18 @@ func ExportBenchmarktoJson(benchmark : String, Customers : [Customer]) -> Data? 
         return nil
     }
 }
+
+func EncodeStrictness(benchmark: String,  strictnessProgression : [Double]) -> Data? {
+    let encodeStrictness = StrictnessProgression(benchmark: benchmark, averageStrictness: strictnessProgression)
+    let encoder = JSONEncoder()
+    if let data = try? encoder.encode(encodeStrictness) {
+        print("Encoded strictness progression \(benchmark)")
+        return data
+    }
+    print("Failed to encoded strictness progression.")
+    return nil
+}
+
 
 func SaveDatatoFile(benchmarkName : String, data: Data, fileName : String) {
     let fileManager = FileManager()

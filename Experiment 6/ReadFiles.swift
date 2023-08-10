@@ -8,8 +8,9 @@
 import Foundation
 
 func ReadFiles(benchmarkNameContains : String? = nil, afterName : String? = nil) -> [String] {
-    let docsDir = NSHomeDirectory().appending("/Documents/Masters/Research Project/Experiment 6/Experiment 6/Benchmarks")
+//    let docsDir = NSHomeDirectory().appending("/Documents/Masters/Research Project/Experiment 6/Experiment 6/Benchmarks")
     let localFileManager = FileManager()
+    let docsDir = localFileManager.currentDirectoryPath.appending("/Benchmarks")
     var dataset = [String]()
     let dirEnum = localFileManager.enumerator(atPath: docsDir)
     while let file = dirEnum?.nextObject() as? String {

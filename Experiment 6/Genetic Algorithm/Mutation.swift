@@ -182,9 +182,9 @@ extension GeneticAlgorithm {
         for (id, truck) in returnIndividual.trucks.enumerated() {
             let emitterCount = Int.random(in: 0...(5 * truck.sequence.count / 6))
             if emitterCount != 0 {
-                var customers = truck.GetDistanceSequence(customers: Customers.values)
+                var customers = truck.sequence
                 for _ in 1...emitterCount {
-                    if let emittedCustomer = SpinRouletteWheel(strictness: strictness, onCandidates: customers) {
+                    if let emittedCustomer = customers.randomElement() {
                         freeCustomerIDs.append(emittedCustomer)
                         customers = customers.filter({$0 != emittedCustomer})
                         _ = returnIndividual.trucks[id].RemoveCustomer(customer: Customers[emittedCustomer]!, allCustomers: Customers.values)
