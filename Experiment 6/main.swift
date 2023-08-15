@@ -10,7 +10,7 @@ import Foundation
 var files = [String]()
 let commandLine = CommandLine.arguments
 if commandLine.count != 3 {
-    files = ReadFiles(benchmarkNameContains: "A-n32-k5")
+    files = ReadFiles()
 } else {
     switch commandLine[1] {
     case "contains": files = ReadFiles(benchmarkNameContains: commandLine[2])
@@ -21,8 +21,8 @@ if commandLine.count != 3 {
 let clock = ContinuousClock()
 for (index, file) in files.enumerated() {
     let benchmarkName = String(file.split(separator: "/").last!.split(separator: ".").first!)
-    print("–––––––––––––––––––––––––(\(index + 1)/\(files.count)) \(benchmarkName)–––––––––––––––––––––––––")
-    for run in 1...10 {
+    for run in 1...1 {
+        print("–––––––––––––––––––––––––(\(index + 1)/\(files.count)) \(benchmarkName), run \(run)–––––––––––––––––––––––––")
         print("Run \(run)")
         let ge = GeneticAlgorithm(fileName: file, populationSize: 100)
         var archive = [Routine]()
@@ -37,7 +37,7 @@ for (index, file) in files.enumerated() {
         if let data = EncodeConvergence(benchmarkName: String(benchmarkName), distanceVector: ge.convergenceDistanceVector, fuelVector: ge.convergenceFuelVector, OptimalDistance: ge.optimal) {
             SaveDatatoFile(benchmarkName: benchmarkName, data: data, fileName: "convergence (\(run))")
         }
-        if let data = ExportBenchmarktoJson(benchmark: benchmarkName, Customers: ge.Customers.values + [ge.Depot]) {
+        if let data = ExportBenchmarktoJson(benchmark: benchmarkName, Customers: ge.Customers.values + [ge.Depot], VehicleCapacity: ge.vehicleCapacity, FleetSize: ge.numberOfTrucks) {
             SaveDatatoFile(benchmarkName: benchmarkName, data: data, fileName: benchmarkName)
         }
     }
