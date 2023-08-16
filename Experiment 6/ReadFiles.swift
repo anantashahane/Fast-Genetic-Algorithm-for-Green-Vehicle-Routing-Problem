@@ -8,18 +8,18 @@
 import Foundation
 
 func ReadFiles(benchmarkNameContains : String? = nil, startingFrom : String? = nil) -> [String] {
-    let docsDir = NSHomeDirectory().appending("/Documents/Masters/Research Project/Experiment 6/Experiment 6/Benchmarks")
     let localFileManager = FileManager()
+    let docsDir = localFileManager.currentDirectoryPath.appending("/Benchmarks")
     var dataset = [String]()
     let dirEnum = localFileManager.enumerator(atPath: docsDir)
     while let file = dirEnum?.nextObject() as? String {
         if let benchmarkNameContains = benchmarkNameContains {
-            if file.hasSuffix(".vrp") && file.contains(benchmarkNameContains){
+            if file.hasSuffix(".json") && file.contains(benchmarkNameContains){
                 let location = docsDir.appending("/\(file)")
                 dataset.append(location)
             }
         } else {
-            if file.hasSuffix(".vrp") {
+            if file.hasSuffix(".json") {
                 let location = docsDir.appending("/\(file)")
                 dataset.append(location)
             }
@@ -36,3 +36,4 @@ func ReadFiles(benchmarkNameContains : String? = nil, startingFrom : String? = n
     }
     return dataset
 }
+

@@ -10,7 +10,7 @@ import Foundation
 var files = [String]()
 let commandLine = CommandLine.arguments
 if commandLine.count != 3 {
-    files = ReadFiles(benchmarkNameContains: "M-n200-k17")
+    files = ReadFiles()
 } else {
     switch commandLine[1] {
     case "contains": files = ReadFiles(benchmarkNameContains: commandLine[2])
@@ -37,7 +37,7 @@ for (index, file) in files.enumerated() {
         if let data = EncodeConvergence(benchmarkName: String(benchmarkName), distanceVector: ge.convergenceDistanceVector, fuelVector: ge.convergenceFuelVector, OptimalDistance: ge.optimal) {
             SaveDatatoFile(benchmarkName: benchmarkName, data: data, fileName: "convergence (\(run))")
         }
-        if let data = ExportBenchmarktoJson(benchmark: benchmarkName, Customers: ge.Customers.values + [ge.Depot]) {
+        if let data = ExportBenchmarktoJson(benchmark: benchmarkName, Customers: ge.Customers.values + [ge.Depot], fleetSize: ge.numberOfTrucks, optimal: ge.optimal, vehicleCapacity: ge.vehicleCapacity) {
             SaveDatatoFile(benchmarkName: benchmarkName, data: data, fileName: benchmarkName)
         }
     }
