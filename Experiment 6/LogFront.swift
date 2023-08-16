@@ -26,14 +26,15 @@ struct Convergence : Encodable {
     let fuelSequence : [Double]
 }
 
-struct EncodedBenchmark : Encodable {
+struct EncodedBenchmark : Codable {
     let benchmark : String
     let customers : [EncodedCustomer]
     let fleetSize : Int
     let vehicleCapcity : Int
+    let optimal : Int?
 }
 
-struct EncodedCustomer : Encodable {
+struct EncodedCustomer : Codable {
     let id : Int
     let x : Double
     let y : Double
@@ -69,13 +70,13 @@ func EncodeConvergence(benchmarkName: String, distanceVector : [Double], fuelVec
     }
 }
 
-func ExportBenchmarktoJson(benchmark : String, Customers : [Customer], VehicleCapacity: Int, FleetSize : Int) -> Data? {
+func ExportBenchmarktoJson(benchmark : String, Customers : [Customer], VehicleCapacity: Int, FleetSize : Int, optimal : Int?) -> Data? {
     var encodedCustomers = [EncodedCustomer]()
     for customer in Customers {
         let encodedCustomer = EncodedCustomer(id: customer.id, x: customer.x, y: customer.y, demand: customer.demand)
         encodedCustomers.append(encodedCustomer)
     }
-    let EncodedBenchmark = EncodedBenchmark(benchmark: benchmark, customers: encodedCustomers, fleetSize: FleetSize, vehicleCapcity: VehicleCapacity)
+    let EncodedBenchmark = EncodedBenchmark(benchmark: benchmark, customers: encodedCustomers, fleetSize: FleetSize, vehicleCapcity: VehicleCapacity, optimal: optimal)
     let encoder = JSONEncoder()
     if let data = try? encoder.encode(EncodedBenchmark.self) {
         print("Exported \(benchmark)")

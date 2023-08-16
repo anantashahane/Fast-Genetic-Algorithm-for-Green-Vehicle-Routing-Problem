@@ -37,7 +37,7 @@ for (index, file) in files.enumerated() {
         if let data = EncodeConvergence(benchmarkName: String(benchmarkName), distanceVector: ge.convergenceDistanceVector, fuelVector: ge.convergenceFuelVector, OptimalDistance: ge.optimal) {
             SaveDatatoFile(benchmarkName: benchmarkName, data: data, fileName: "convergence (\(run))")
         }
-        if let data = ExportBenchmarktoJson(benchmark: benchmarkName, Customers: ge.Customers.values + [ge.Depot], VehicleCapacity: ge.vehicleCapacity, FleetSize: ge.numberOfTrucks) {
+        if let data = ExportBenchmarktoJson(benchmark: benchmarkName, Customers: ge.Customers.values + [ge.Depot], VehicleCapacity: ge.vehicleCapacity, FleetSize: ge.numberOfTrucks, optimal: ge.optimal) {
             SaveDatatoFile(benchmarkName: benchmarkName, data: data, fileName: benchmarkName)
         }
     }

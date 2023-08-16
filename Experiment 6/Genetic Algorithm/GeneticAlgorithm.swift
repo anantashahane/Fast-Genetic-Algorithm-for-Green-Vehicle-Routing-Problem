@@ -35,7 +35,6 @@ class GeneticAlgorithm {
         Customers = Dictionary(uniqueKeysWithValues: customers.filter({$0.customerType == .Customer}).map({($0.id, $0)}))
         Depot = customers.filter({$0.customerType == .Depot}).first!
         vehicleCapacity = capacity
-        
         (maxDistance, distanceMatrix) = GetDistanceMatrix(Customers: customers)
     }
     
