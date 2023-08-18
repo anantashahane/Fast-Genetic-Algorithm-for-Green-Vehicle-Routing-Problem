@@ -1435,7 +1435,7 @@
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = "Experiment 6/Experiment 6.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = Q7KHHPX4EM;
+				DEVELOPMENT_TEAM = "";
 				ENABLE_HARDENED_RUNTIME = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -1447,7 +1447,7 @@
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = "Experiment 6/Experiment 6.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = Q7KHHPX4EM;
+				DEVELOPMENT_TEAM = "";
 				ENABLE_HARDENED_RUNTIME = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;

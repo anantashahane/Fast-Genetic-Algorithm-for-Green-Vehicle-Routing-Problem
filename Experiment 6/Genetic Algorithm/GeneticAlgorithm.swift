@@ -17,6 +17,7 @@ class GeneticAlgorithm {
     let distanceMatrix : [[Double]]
     let populationSize : Int
     let optimal : Int?
+    let iterationCount : Int
     //Variables
     var rouletteCache = [String : [Double]]()
     var parentPopulation = [Routine]()
@@ -25,20 +26,22 @@ class GeneticAlgorithm {
     var archive = MultiObjectiveArchive(dimensions: [.Distance : .Minimisation, .Fuel : .Minimisation])
     var convergenceDistanceVector = [Double]()
     var convergenceFuelVector = [Double]()
-    
-    init(fileName: String, populationSize: Int) {
+    var remainingIterations : Int
+    init(fileName: String, populationSize: Int, iterationCount : Int) {
         self.populationSize = populationSize
         
         let (numberofTrucks, customers, capacity, opt) = Readfile(filePath: fileName)
         optimal = opt
         numberOfTrucks = numberofTrucks
+        self.iterationCount = iterationCount
+        remainingIterations = iterationCount
         Customers = Dictionary(uniqueKeysWithValues: customers.filter({$0.customerType == .Customer}).map({($0.id, $0)}))
         Depot = customers.filter({$0.customerType == .Depot}).first!
         vehicleCapacity = capacity
         (maxDistance, distanceMatrix) = GetDistanceMatrix(Customers: customers)
     }
     
-    func RunAlgorithm(iterationCount : Int) -> [Routine] {
+    func RunAlgorithm() -> [Routine] {
         Initialise()
         Evaluate(parent: true)
         for gen in 1...iterationCount {
@@ -54,11 +57,12 @@ class GeneticAlgorithm {
             convergenceFuelVector.append(parentPopulation.map({$0.GetFitness(for: .Fuel)}).min()!)
             if (gen % 1 == 0) {
                 if let optimal = optimal {
-                    print("\t Generation \(gen) Convergence: \(String(format: "%.2f", (distance.min()! - Double(optimal)) * 100 / Double(optimal)))% (\(optimal)): Distance [\(String(format: "%.2f", distance.min()!)), \(String(format: "%.2f", distance.max()!))], Fuel [\(String(format: "%.2f", fuel.min()!)), \(String(format: "%.2f", fuel.max()!))], fronts \(paretoFronts.count), archive size \(archive.GetArchive().count).")
+                    print("\t Generation \(gen) Convergence: \(String(format: "%.2f", (distance.min()! - Double(optimal)) * 100 / Double(optimal)))% (\(optimal)): Distance [\(String(format: "%.2f", distance.min()!)), \(String(format: "%.2f", distance.max()!))], Fuel [\(String(format: "%.2f", fuel.min()!)), \(String(format: "%.2f", fuel.max()!))], fronts \(paretoFronts.count), gamama : \(String(format: "%.3f", Double(remainingIterations) / Double(iterationCount))), archive size \(archive.GetArchive().count).")
                 } else {
                     print("\t Generation \(gen) Archive Range: Distance [\(String(format: "%.2f", distance.min()!)), \(String(format: "%.2f", distance.max()!))], Fuel [\(String(format: "%.2f", fuel.min()!)), \(String(format: "%.2f", fuel.max()!))], fronts \(paretoFronts.count), archive size \(archive.GetArchive().count).")
                 }
             }
+            remainingIterations -= 1
         }
         convergenceDistanceVector.append(parentPopulation.map({$0.GetFitness(for: .Distance)}).min()!)
         convergenceFuelVector.append(parentPopulation.map({$0.GetFitness(for: .Fuel)}).min()!)

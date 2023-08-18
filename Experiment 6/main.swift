@@ -24,10 +24,10 @@ for (index, file) in files.enumerated() {
     for run in 1...1 {
         print("–––––––––––––––––––––––––(\(index + 1)/\(files.count)) \(benchmarkName), run \(run)–––––––––––––––––––––––––")
         print("Run \(run)")
-        let ge = GeneticAlgorithm(fileName: file, populationSize: 100)
+        let ge = GeneticAlgorithm(fileName: file, populationSize: 100, iterationCount: 500)
         var archive = [Routine]()
         let result = clock.measure {
-            archive = ge.RunAlgorithm(iterationCount: 500)
+            archive = ge.RunAlgorithm()
         }
         print("Took \(result).")
         
