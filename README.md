@@ -28,11 +28,11 @@ The convergence speed comparison of Tumble Weed Model vs No Adaptation
 ![Convergence Speed Results](./Assets/Tumble%20Weed%20Model%20vs%20No%20Corridor:%20A-n32-k5.png "Convergence Speed Results.")
 
 The final distance result after running $(100 + 100)$ genetic algorithm for $500$ iterations with the range obtained after testing it for $10$ runs:
-![Distance Optimisation Results](./Assets/DistanceResults.png "Distance Optimisation Results.")
+![Distance Optimisation Results](https://github.com/Ananta-One-1/Fast-Genetic-Algorithm-for-Green-Vehicle-Routing-Problem/blob/main/Assets/DistanceResults.png "Distance Optimisation Results.")
 
 
 The final fuel results of the above test benchmark, and the range of results range obtained after testing it for $10$ runs:
-![Fuel Optimisation Results](./Assets/FuelPlot.png "Fuel Optimisation Results.")
+![Fuel Optimisation Results](https://github.com/Ananta-One-1/Fast-Genetic-Algorithm-for-Green-Vehicle-Routing-Problem/blob/main/Assets/FuelPlot.png "Fuel Optimisation Results.")
 
 
 ## How to use
