@@ -30,8 +30,10 @@ The convergence speed comparison of Tumble Weed Model vs No Adaptation
 The final distance result after running $(100 + 100)$ genetic algorithm for $500$ iterations with the range obtained after testing it for $10$ runs:
 ![Distance Optimisation Results](./Assets/DistanceResults.png "Distance Optimisation Results.")
 
+
 The final fuel results of the above test benchmark, and the range of results range obtained after testing it for $10$ runs:
-!["Optimal Fuel Utilisation Results"](./Assets/FuelPlot.png "Optimal Fuel Utilisation Results")
+![Fuel Optimisation Results](./Assets/FuelPlot.png "Fuel Optimisation Results.")
+
 
 ## How to use
 For Xcode user, simple open the Xcode build the project, and copy the `Benchmarks` folders into the same directory where the built target is created. Then use:
